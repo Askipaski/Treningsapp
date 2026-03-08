@@ -2,7 +2,7 @@
   "name": "Do it ! - Treningsapp",
   "short_name": "Do it !",
   "description": "Din personlige treningsapp",
-  "start_url": "./index.html",
+  "start_url": "/Treningsapp/index.html",
   "display": "standalone",
   "background_color": "#1E1E2E",
   "theme_color": "#C850C0",
