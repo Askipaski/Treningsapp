@@ -210,6 +210,26 @@
     body.view-home header.app-header {
       display: none;
     }
+    body.view-timer header.app-header,
+    body.view-settings header.app-header {
+      display: none;
+    }
+    body.view-timer main {
+      overflow: hidden;
+    }
+    body.view-timer .view[data-view="timer"] {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+      flex: 1;
+    }
+    body.view-timer .view[data-view="timer"] .timer-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      justify-content: flex-start;
+    }
 
     .section-title-row {
       display: flex;
@@ -1454,9 +1474,16 @@
       padding-bottom: max(10px, env(safe-area-inset-bottom));
       width: 100vw;
       border-radius: 0;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      overflow: hidden;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      padding-left: 8px;
+      padding-right: 8px;
+      box-sizing: border-box;
+      overflow-x: auto;
+      overflow-y: hidden;
       backdrop-filter: blur(18px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.38);
       z-index: 20;
@@ -1473,10 +1500,11 @@
     }
 
     .nav-btn {
-      width: 100%;
+      width: auto;
+      flex: 0 0 auto;
       border-radius: 20px;
       border: none;
-      padding: 8px 2px;
+      padding: 8px 12px;
       font-size: 10px;
       font-weight: 600;
       display: flex;
@@ -1487,10 +1515,7 @@
       background: transparent;
       opacity: 0.72;
       cursor: pointer;
-      min-width: 0;
       text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
@@ -1498,10 +1523,7 @@
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
-      min-width: 0;
     }
 
     .nav-btn-active {
@@ -1735,24 +1757,28 @@
 
     .btn-no-workout {
       width: 100%;
-      padding: 10px 16px;
+      padding: 8px 12px;
       font-size: 14px;
       font-weight: 600;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(0,0,0,0.12);
+      border: none;
       cursor: pointer;
-      background: linear-gradient(to right, #00B4D8, #9B5DE5);
+      background: linear-gradient(135deg, #00B4D8, #9B5DE5);
       color: #fff;
+      box-shadow: 0 8px 18px rgba(0, 180, 216, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 12px;
     }
 
     body.theme-dark .btn-no-workout {
-      border-color: rgba(255,255,255,0.15);
-      background: linear-gradient(to right, #00B4D8, #9B5DE5);
+      background: linear-gradient(135deg, #00B4D8, #9B5DE5);
     }
 
     .btn-no-workout:active {
-      opacity: 0.9;
+      transform: scale(0.97);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
     }
 
     .complete-mood-label,
@@ -1983,22 +2009,30 @@
     }
     body.theme-dark .oekt-override-select { border-color: var(--border-dark); }
 
-    .morgenokt-block { margin: 0 0 14px 0; }
+    .morgenokt-block { margin: 14px 0 14px 0; }
     .morgenokt-block .morgenokt-done { font-size: 14px; font-weight: 600; color: var(--primary); }
     .btn-morgenokt {
       width: 100%;
-      padding: 12px 16px;
+      padding: 8px 12px;
       border: none;
-      border-radius: 50px;
+      border-radius: var(--radius-pill);
       font-size: 14px;
       font-weight: 600;
       color: #0a3d40;
-      background: linear-gradient(90deg, rgba(255,255,255,0.95), #00D4D8);
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), #00D4D8);
+      box-shadow: 0 8px 18px rgba(0, 212, 216, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+    }
+    .btn-morgenokt:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
     }
     body.theme-dark .btn-morgenokt {
       color: #fff;
-      background: linear-gradient(90deg, rgba(255,255,255,0.2), #00D4D8);
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), #00D4D8);
     }
     .morgenokt-type-options { display: flex; flex-direction: column; gap: 8px; }
     .morgenokt-type-options button {
@@ -8215,7 +8249,8 @@
           const isTarget = view.dataset.view === target;
           view.classList.toggle("view-active", isTarget);
         });
-        document.body.classList.toggle("view-home", target === "home");
+        document.body.classList.remove("view-home", "view-week", "view-log", "view-timer", "view-settings");
+        document.body.classList.add("view-" + target);
 
         const navBtns = document.querySelectorAll(".nav-btn");
         navBtns.forEach(btn => {
@@ -8249,7 +8284,7 @@
           let startIndex = 0;
           let mainWidth = 0;
           const SWIPE_THRESHOLD_PX = 80;
-          const SWIPE_THRESHOLD_PERCENT = 20;
+          const SWIPE_THRESHOLD_PERCENT = 25;
 
           mainEl.addEventListener("touchstart", function(e) {
             touchStartX = e.touches[0].clientX;
@@ -8286,7 +8321,8 @@
             views.forEach(view => {
               view.classList.toggle("view-active", view.dataset.view === target);
             });
-            document.body.classList.toggle("view-home", target === "home");
+            document.body.classList.remove("view-home", "view-week", "view-log", "view-timer", "view-settings");
+            document.body.classList.add("view-" + target);
             const navBtns = document.querySelectorAll(".nav-btn");
             navBtns.forEach(btn => {
               btn.classList.toggle("nav-btn-active", btn.dataset.target === target);
