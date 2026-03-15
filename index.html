@@ -187,7 +187,7 @@
 
     .views-swipe-container {
       display: flex;
-      width: 400%;
+      width: 500%;
       flex: 1;
       min-height: 0;
       will-change: transform;
@@ -195,9 +195,9 @@
     }
 
     .views-swipe-container .view {
-      flex: 0 0 25%;
-      width: 25%;
-      min-width: 25%;
+      flex: 0 0 20%;
+      width: 20%;
+      min-width: 20%;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -620,6 +620,12 @@
       font-size: 11px;
       opacity: 0.8;
     }
+    .week-morgenokt-line {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.85;
+      color: var(--secondary);
+    }
 
     .week-status--planlagt .week-status-dot {
       background: var(--secondary);
@@ -854,6 +860,152 @@
       text-align: right;
     }
 
+    .log-calendar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 11px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .log-calendar-nav button {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.theme-dark .log-calendar-nav button {
+      border-color: var(--border-dark);
+    }
+    .log-calendar-grid-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .log-calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text);
+      opacity: 0.85;
+      text-align: center;
+    }
+    body.theme-light .log-calendar-weekdays { color: #1a1a1a; }
+    body.theme-dark .log-calendar-weekdays { color: #fff; }
+    .log-calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-auto-rows: 36px;
+      gap: 2px;
+    }
+    .log-cal-day {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text);
+      border-radius: 50%;
+      cursor: default;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      max-width: 32px;
+      max-height: 32px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    body.theme-light .log-cal-day { color: #1a1a1a; }
+    body.theme-dark .log-cal-day { color: #fff; }
+    .log-cal-day--empty { visibility: hidden; }
+    .log-cal-day--clickable { cursor: pointer; }
+    .log-cal-day--done {
+      background: linear-gradient(135deg, #C850C0, #FF6B9D);
+      color: #fff;
+    }
+    .log-cal-day--skipped {
+      background: linear-gradient(90deg, #00D4D8, #C850C0);
+      color: #fff;
+    }
+    .log-cal-day--today {
+      box-shadow: 0 0 0 2px #FF6B9D;
+    }
+    .log-cal-day--today.log-cal-day--done,
+    .log-cal-day--today.log-cal-day--skipped {
+      box-shadow: 0 0 0 2px #FF6B9D;
+    }
+    .log-cal-day--joggetur::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #00D4D8;
+    }
+    .log-list-item-highlight {
+      animation: logHighlight 2s ease-out;
+    }
+    @keyframes logHighlight {
+      0% { background: rgba(255, 107, 157, 0.35); }
+      100% { background: transparent; }
+    }
+
+    .log-day-detail-dialog {
+      position: relative;
+    }
+    .log-day-detail-dialog .modal-title {
+      padding-right: 28px;
+    }
+    .log-day-detail-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .log-day-detail-close:hover {
+      opacity: 1;
+      background: rgba(0,0,0,0.06);
+    }
+    body.theme-dark .log-day-detail-close:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .log-day-detail-body {
+      margin-bottom: 12px;
+    }
+    .log-day-detail-row {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    body.theme-light .log-day-detail-row { color: #1a1a1a; }
+    body.theme-dark .log-day-detail-row { color: #fff; }
+
     .log-pr-card {
       background: linear-gradient(135deg, #C850C0, #FF6B9D);
       color: #fff;
@@ -1071,6 +1223,219 @@
       font-style: italic;
     }
 
+    .alcohol-log-select {
+      flex: 1;
+      min-width: 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+    }
+    body.theme-dark .alcohol-log-select {
+      border-color: var(--border-dark);
+    }
+    .alcohol-log-weekly-wrap {
+      font-size: 12px;
+      margin-top: 6px;
+      color: var(--text);
+    }
+    body.theme-light .alcohol-log-weekly-wrap { color: #1a1a1a; }
+    body.theme-dark .alcohol-log-weekly-wrap { color: #fff; }
+    .alcohol-log-weekly-row {
+      padding: 2px 0;
+      opacity: 0.9;
+    }
+    .alcohol-log-warning {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.25), rgba(239, 68, 68, 0.2));
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #b91c1c;
+    }
+    body.theme-dark .alcohol-log-warning {
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.3), rgba(239, 68, 68, 0.25));
+      border-color: rgba(239, 68, 68, 0.5);
+      color: #fca5a5;
+    }
+    .alcohol-log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      max-height: 120px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    .alcohol-log-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0.9;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text);
+    }
+    body.theme-dark .alcohol-log-item {
+      border-bottom-color: var(--border-dark);
+      color: #fff;
+    }
+    .alcohol-log-item-delete {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+      opacity: 0.8;
+    }
+    .alcohol-log-item-delete:hover {
+      opacity: 1;
+    }
+
+    .timer-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 10px 0;
+    }
+    .timer-config-card {
+      width: 100%;
+      max-width: 320px;
+      border-left: 4px solid #FF6B9D;
+      padding: 12px 14px;
+    }
+    body.theme-dark .timer-config-card {
+      border-left-color: #FF6B9D;
+    }
+    .timer-config-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .timer-config-row:last-child { margin-bottom: 0; }
+    .timer-config-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .timer-config-input {
+      width: 80px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      text-align: right;
+    }
+    body.theme-dark .timer-config-input {
+      border-color: var(--border-dark);
+    }
+    .timer-ring-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+    }
+    .timer-ring-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .timer-ring-bg {
+      stroke: rgba(0,0,0,0.08);
+    }
+    body.theme-dark .timer-ring-bg {
+      stroke: rgba(255,255,255,0.12);
+    }
+    .timer-ring-progress {
+      stroke: url(#timerRingGradient);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.2s linear, stroke 0.3s ease;
+    }
+    .timer-ring-progress.timer-ring-rest {
+      stroke: url(#timerRingRestGradient);
+      transition: stroke-dashoffset 0.2s linear, stroke 0.3s ease;
+    }
+    .timer-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .timer-display {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    body.theme-light .timer-display { color: #1a1a1a; }
+    body.theme-dark .timer-display { color: #fff; }
+    .timer-round-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    .timer-countdown-blink {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      font-weight: 800;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      z-index: 30;
+      opacity: 1;
+    }
+    .timer-countdown-blink.timer-blink-pop {
+      animation: timerBlinkPop 0.3s ease-out;
+    }
+    @keyframes timerBlinkPop {
+      from { transform: scale(1.5); }
+      to { transform: scale(1); }
+    }
+    .timer-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .timer-do-it-btn {
+      background: linear-gradient(135deg, #C850C0, #FF6B9D);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .timer-reset-btn {
+      background: linear-gradient(to right, #00B4D8, #9B5DE5);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
     nav.bottom-nav {
       position: fixed;
       left: 0;
@@ -1080,7 +1445,7 @@
       width: 100vw;
       border-radius: 0;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(5, 1fr);
       overflow: hidden;
       backdrop-filter: blur(18px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.38);
@@ -1217,6 +1582,25 @@
       font-style: italic;
     }
 
+    .exercise-alt-list select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--bg-light);
+      font-size: 14px;
+      margin-bottom: 8px;
+      box-sizing: border-box;
+    }
+    body.theme-dark .exercise-alt-list select {
+      border-color: var(--border-dark);
+      background: var(--bg-dark);
+    }
+    .exercise-alt-list .bytt-confirm-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      border-radius: 10px;
+    }
     .exercise-alt-list {
       margin-top: 4px;
       padding-top: 4px;
@@ -1380,6 +1764,8 @@
       border: none;
     }
 
+    .continue-or-new-text { margin-bottom: 14px; font-size: 14px; color: var(--text); }
+    #continueOrNewWorkoutModal .modal-body .btn { display: block; width: 100%; margin-bottom: 8px; }
     .set-log-modal-dialog .modal-title { font-size: 16px; margin-bottom: 10px; }
     .set-log-counter { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
     .set-log-fields { margin-bottom: 12px; }
@@ -1391,6 +1777,10 @@
     .set-log-save-btn { width: 100%; padding: 12px; font-weight: 600; border: none; border-radius: 12px; background: linear-gradient(to right, #C850C0, #FF6B9D); color: #fff; margin-top: 8px; cursor: pointer; }
     .set-log-skip-link { display: block; text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; cursor: pointer; text-decoration: none; background: none; border: none; width: 100%; padding: 4px; }
     .set-log-done { font-weight: 600; text-align: center; color: var(--primary); font-size: 15px; }
+    .set-log-logged-list { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .set-log-logged-list .set-log-set-line { margin-bottom: 2px; }
+    .set-log-nullstill-btn { display: block; width: 100%; margin-top: 8px; padding: 8px 12px; font-size: 13px; border-radius: 10px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.6); color: var(--text); cursor: pointer; }
+    body.theme-dark .set-log-nullstill-btn { border-color: var(--border-dark); background: rgba(0,0,0,0.2); }
     .cond-log-intensitet { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
     .cond-intensitet-btn { flex: 1; min-width: 80px; padding: 10px 12px; font-size: 13px; font-weight: 600; border-radius: 10px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.5); cursor: pointer; color: var(--text); }
     body.theme-dark .cond-intensitet-btn { border-color: var(--border-dark); background: rgba(0,0,0,0.2); }
@@ -1565,6 +1955,134 @@
       flex-direction: column;
       gap: 10px;
       margin-bottom: 16px;
+    }
+
+    .morgenokt-block {
+      margin: 0 0 14px 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      border-left: 4px solid #00D4D8;
+      background: rgba(255,255,255,0.95);
+    }
+    body.theme-dark .morgenokt-block {
+      border-color: var(--border-dark);
+      border-left-color: #00D4D8;
+      background: rgba(20,20,35,0.95);
+    }
+    .morgenokt-block .morgenokt-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .morgenokt-block select { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-light); background: var(--bg-light); font-size: 14px; margin-bottom: 8px; box-sizing: border-box; }
+    body.theme-dark .morgenokt-block select { border-color: var(--border-dark); background: var(--bg-dark); }
+    .morgenokt-block .morgenokt-done { font-size: 14px; font-weight: 600; color: var(--primary); }
+
+    .joggetur-block {
+      margin: 0 0 14px 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      border-left: 4px solid #00D4D8;
+      background: rgba(255,255,255,0.95);
+    }
+    body.theme-dark .joggetur-block {
+      border-color: var(--border-dark);
+      border-left-color: #00D4D8;
+      background: rgba(20,20,35,0.95);
+    }
+    .joggetur-log-btn {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #00D4D8, #00B4D8);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .joggetur-modal-dialog { position: relative; max-height: 90vh; overflow-y: auto; }
+    .joggetur-modal-dialog .modal-title { padding-right: 28px; }
+    .joggetur-modal-body { display: flex; flex-direction: column; gap: 10px; }
+    .joggetur-field { display: flex; flex-direction: column; gap: 4px; }
+    .joggetur-label { font-size: 12px; font-weight: 600; color: var(--text); }
+    body.theme-light .joggetur-label { color: #1a1a1a; }
+    body.theme-dark .joggetur-label { color: #fff; }
+    .joggetur-input {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+    }
+    body.theme-dark .joggetur-input { border-color: var(--border-dark); }
+    .joggetur-time-row .joggetur-label { margin-bottom: 0; }
+    .joggetur-time-inputs { display: flex; align-items: center; gap: 6px; }
+    .joggetur-input-small { width: 64px; text-align: center; }
+    .joggetur-time-sep { font-weight: 700; color: var(--text); }
+    .joggetur-calc-row { font-size: 13px; color: var(--text); }
+    body.theme-light .joggetur-calc-row { color: #1a1a1a; }
+    body.theme-dark .joggetur-calc-row { color: #fff; }
+    .joggetur-calc-label { opacity: 0.9; }
+    .joggetur-calc-value { font-weight: 600; margin-left: 6px; }
+    .joggetur-mood-row { display: flex; gap: 8px; }
+    .joggetur-mood-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 2px solid var(--border-light);
+      background: var(--surface);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+    body.theme-dark .joggetur-mood-btn { border-color: var(--border-dark); }
+    .joggetur-mood-btn.joggetur-mood-active { border-color: #00D4D8; background: rgba(0,212,216,0.15); }
+    .joggetur-toggle-row { flex-direction: row; align-items: center; gap: 10px; }
+    .joggetur-checkbox { width: 20px; height: 20px; accent-color: #00D4D8; }
+    .joggetur-textarea {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      resize: vertical;
+      font-family: inherit;
+    }
+    body.theme-dark .joggetur-textarea { border-color: var(--border-dark); }
+
+    .workout-screen-oppvarming {
+      margin: 12px 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      border-left: 4px solid #FF6B9D;
+      background: rgba(255,255,255,0.95);
+    }
+    body.theme-dark .workout-screen-oppvarming {
+      border-color: var(--border-dark);
+      border-left-color: #FF6B9D;
+      background: rgba(20,20,35,0.95);
+    }
+    .workout-screen-oppvarming-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .workout-screen-oppvarming-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #E0E0E0;
+      background: #fff;
+      font-size: 14px;
+      color: inherit;
+      box-sizing: border-box;
+    }
+    body.theme-dark .workout-screen-oppvarming-select {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(11,11,25,0.9);
+      color: var(--text-light);
     }
 
     .workout-screen-exercise {
@@ -1814,6 +2332,10 @@
             </div>
           </div>
           <div id="todayAnbefaling" class="today-anbefaling" style="display:none;"></div>
+          <div id="homeMorgenoktBlock" class="morgenokt-block"></div>
+          <div id="homeJoggeturBlock" class="joggetur-block">
+            <button type="button" id="joggeturLogBtn" class="btn joggetur-log-btn">Logg joggetur</button>
+          </div>
           <div id="homeLengthGrid" class="length-grid">
             <div class="length-card" data-length="20" data-label="Kort">
               <div class="length-header-row">
@@ -1928,8 +2450,8 @@
         </div>
         <div class="card">
           <div class="graph-container" id="graphContainer">
-            <div style="font-weight:600; font-size:12px;">Økter per uke</div>
-            <div id="graphRows"></div>
+            <div id="logCalendarNav" class="log-calendar-nav"></div>
+            <div id="graphRows" class="log-calendar-grid-wrap"></div>
           </div>
 
           <div class="graph-container" id="logExerciseGraphContainer" style="margin-top:16px;">
@@ -1945,6 +2467,54 @@
 
           <div style="margin-top:10px; font-size:12px; font-weight:600;">Gjennomførte økter</div>
           <div class="log-list" id="logList"></div>
+        </div>
+      </section>
+
+      <!-- TIMER -->
+      <section class="view" data-view="timer">
+        <div class="section-title-row">
+          <div class="section-title">Stoppeklokke</div>
+          <div class="section-subtitle">Intervall-timer</div>
+        </div>
+        <div class="timer-wrap">
+          <div class="timer-config card timer-config-card">
+            <div class="timer-config-row">
+              <label class="timer-config-label">Tid (sek)</label>
+              <input type="number" id="timerWorkSec" class="timer-config-input" min="1" max="999" value="45" />
+            </div>
+            <div class="timer-config-row">
+              <label class="timer-config-label">Runder</label>
+              <input type="number" id="timerRounds" class="timer-config-input" min="1" max="99" value="3" />
+            </div>
+            <div class="timer-config-row">
+              <label class="timer-config-label">Hvile mellom (sek)</label>
+              <input type="number" id="timerRestSec" class="timer-config-input" min="0" max="999" value="15" />
+            </div>
+          </div>
+          <div class="timer-ring-wrap">
+            <svg class="timer-ring-svg" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="timerRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#C850C0" />
+                  <stop offset="100%" stop-color="#FF6B9D" />
+                </linearGradient>
+                <linearGradient id="timerRingRestGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#00D4D8" />
+                  <stop offset="100%" stop-color="#00B4D8" />
+                </linearGradient>
+              </defs>
+              <circle class="timer-ring-bg" cx="60" cy="60" r="54" fill="none" stroke-width="8" />
+              <circle id="timerRingProgress" class="timer-ring-progress" cx="60" cy="60" r="54" fill="none" stroke-width="8" stroke-dasharray="339.292" stroke-dashoffset="0" />
+            </svg>
+            <div class="timer-center">
+              <div id="timerDisplay" class="timer-display">0:45</div>
+              <div id="timerRoundLabel" class="timer-round-label"></div>
+            </div>
+          </div>
+          <div class="timer-buttons">
+            <button type="button" id="timerDoItBtn" class="btn timer-do-it-btn">DO IT</button>
+            <button type="button" id="timerResetBtn" class="btn timer-reset-btn">Nullstill</button>
+          </div>
         </div>
       </section>
 
@@ -1991,8 +2561,23 @@
             </div>
           </div>
 
-          <div class="settings-group" style="margin-top:14px;">
-            <button type="button" class="btn btn-outline" id="nullstillTreningsplanBtn">Nullstill treningsplan</button>
+          <div class="settings-group">
+            <div class="settings-label">Alkohollogg</div>
+            <div class="settings-field-row">
+              <select id="alcoholLogSelect" class="alcohol-log-select">
+                <option value="øl033">Øl 0,33 (1 enhet)</option>
+                <option value="øl05">Øl 0,5 (1,5 enheter)</option>
+                <option value="vinglass">Vin glass (1,5 enheter)</option>
+                <option value="brennevin">Brennevin 4cl (1 enhet)</option>
+              </select>
+              <button type="button" class="btn btn-primary" id="alcoholLogAddBtn">Logg i dag</button>
+            </div>
+            <div id="alcoholLogWeeklyWrap" class="alcohol-log-weekly-wrap"></div>
+            <div id="alcoholLogWarningBanner" class="alcohol-log-warning" style="display:none;"></div>
+            <div class="alcohol-log-list-wrap">
+              <div class="settings-label" style="margin-top:8px;">Registrerte innlegg</div>
+              <div class="alcohol-log-list" id="alcoholLogList"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -2010,6 +2595,7 @@
         <div class="workout-screen-duration" id="workoutScreenDuration"></div>
       </div>
     </div>
+    <div id="workoutScreenOppvarming" class="workout-screen-oppvarming" style="display:none;"></div>
     <div class="workout-screen-exercises" id="workoutScreenExercises"></div>
     <button type="button" id="workoutScreenComplete" class="workout-screen-complete">Fullfør økt</button>
   </div>
@@ -2023,6 +2609,9 @@
     </button>
     <button class="nav-btn" data-target="log">
       <span class="nav-btn-label">Logg</span>
+    </button>
+    <button class="nav-btn" data-target="timer">
+      <span class="nav-btn-label">Klokke</span>
     </button>
     <button class="nav-btn" data-target="settings">
       <span class="nav-btn-label">Innstillinger</span>
@@ -2094,11 +2683,23 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="continueOrNewWorkoutModal">
+    <div class="modal-dialog">
+      <div class="modal-title">Påbegynt økt funnet</div>
+      <div class="modal-body">
+        <p class="continue-or-new-text">Det finnes allerede loggede sett for denne dagen. Fortsett eller start på nytt?</p>
+        <button type="button" class="btn btn-primary" id="continueWorkoutBtn">Fortsett påbegynt økt</button>
+        <button type="button" class="btn btn-outline" id="startNewWorkoutBtn">Start ny økt</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="setLogModal">
     <div class="modal-dialog set-log-modal-dialog">
       <div class="modal-title" id="setLogModalTitle">Øvelse</div>
       <div class="modal-body" id="setLogModalBody">
         <div class="set-log-counter" id="setLogCounter">Sett 1 av 1</div>
+        <div class="set-log-logged-list" id="setLogLoggedSetsList"></div>
         <div class="set-log-fields">
           <label class="set-log-label">Vekt (kg)</label>
           <input type="number" min="0" step="0.5" id="setLogVekt" class="set-log-input" placeholder="0 = kroppsvekt" />
@@ -2109,9 +2710,12 @@
         </div>
         <button type="button" class="btn set-log-save-btn" id="setLogSaveBtn">Lagre sett</button>
         <button type="button" class="set-log-skip-link" id="setLogSkipLink">Hopp over logging</button>
+        <button type="button" class="btn set-log-nullstill-btn" id="setLogNullstillBtn">Nullstill</button>
       </div>
       <div class="modal-body set-log-done" id="setLogDoneMsg" style="display:none;">
         Øvelse fullført! ✓
+        <div class="set-log-logged-list" id="setLogDoneLoggedList"></div>
+        <button type="button" class="btn set-log-nullstill-btn" id="setLogNullstillDoneBtn">Nullstill</button>
       </div>
     </div>
   </div>
@@ -2165,6 +2769,87 @@
         <p class="no-workout-response-quote" id="noWorkoutResponseQuote"></p>
         <p class="no-workout-response-ok">Ok, notert! Kom igjen i morgen 💪</p>
         <button type="button" class="btn no-workout-close-btn" id="noWorkoutCloseConfirmBtn">Greit, greit...</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="logDayDetailModal">
+    <div class="modal-dialog log-day-detail-dialog">
+      <button type="button" class="log-day-detail-close" id="logDayDetailClose" aria-label="Lukk">×</button>
+      <div class="modal-title" id="logDayDetailTitle">Økt</div>
+      <div class="modal-body log-day-detail-body">
+        <div class="log-day-detail-row" id="logDayDetailDuration"></div>
+        <div class="log-day-detail-row" id="logDayDetailPackage"></div>
+        <div class="log-day-detail-row" id="logDayDetailMood"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="logDayDetailSeFullLogg">Se full logg</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="joggeturLogModal">
+    <div class="modal-dialog joggetur-modal-dialog">
+      <button type="button" class="log-day-detail-close" id="joggeturModalClose" aria-label="Lukk">×</button>
+      <div class="modal-title">Logg joggetur</div>
+      <div class="modal-body joggetur-modal-body">
+        <div class="joggetur-field">
+          <label class="joggetur-label">Distanse (km)</label>
+          <input type="number" id="joggeturDistanse" class="joggetur-input" step="0.01" min="0" placeholder="0" />
+        </div>
+        <div class="joggetur-field joggetur-time-row">
+          <label class="joggetur-label">Tid (mm:ss)</label>
+          <div class="joggetur-time-inputs">
+            <input type="number" id="joggeturMinutter" class="joggetur-input joggetur-input-small" min="0" max="999" placeholder="0" />
+            <span class="joggetur-time-sep">:</span>
+            <input type="number" id="joggeturSekunder" class="joggetur-input joggetur-input-small" min="0" max="59" placeholder="0" />
+          </div>
+        </div>
+        <div class="joggetur-calc-row">
+          <span class="joggetur-calc-label">Tempo (min/km):</span>
+          <span id="joggeturTempo" class="joggetur-calc-value">—</span>
+        </div>
+        <div class="joggetur-calc-row">
+          <span class="joggetur-calc-label">Fart (km/t):</span>
+          <span id="joggeturFart" class="joggetur-calc-value">—</span>
+        </div>
+        <div class="joggetur-calc-row">
+          <span class="joggetur-calc-label">Est. kalorier (84 kg, MET 8):</span>
+          <span id="joggeturKalorier" class="joggetur-calc-value">—</span>
+        </div>
+        <div class="joggetur-field">
+          <label class="joggetur-label">Snittpuls</label>
+          <input type="number" id="joggeturSnittpuls" class="joggetur-input" min="0" max="250" placeholder="—" />
+        </div>
+        <div class="joggetur-field">
+          <label class="joggetur-label">Makspuls</label>
+          <input type="number" id="joggeturMakspuls" class="joggetur-input" min="0" max="250" placeholder="—" />
+        </div>
+        <div class="joggetur-field">
+          <label class="joggetur-label">Dagsform</label>
+          <div class="joggetur-mood-row">
+            <button type="button" class="joggetur-mood-btn" data-mood="😴">😴</button>
+            <button type="button" class="joggetur-mood-btn" data-mood="😐">😐</button>
+            <button type="button" class="joggetur-mood-btn joggetur-mood-active" data-mood="💪">💪</button>
+            <button type="button" class="joggetur-mood-btn" data-mood="🔥">🔥</button>
+          </div>
+        </div>
+        <div class="joggetur-field joggetur-toggle-row">
+          <label class="joggetur-label">Intervalløkt</label>
+          <input type="checkbox" id="joggeturIntervall" class="joggetur-checkbox" />
+        </div>
+        <div class="joggetur-field joggetur-toggle-row">
+          <label class="joggetur-label">Motbakkeintervall</label>
+          <input type="checkbox" id="joggeturMotbakke" class="joggetur-checkbox" />
+        </div>
+        <div class="joggetur-field">
+          <label class="joggetur-label">Notat</label>
+          <textarea id="joggeturNotat" class="joggetur-textarea" rows="2" placeholder="Valgfritt notat"></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="joggeturModalCancel">Avbryt</button>
+        <button type="button" class="btn btn-primary" id="joggeturModalSave">Lagre</button>
       </div>
     </div>
   </div>
@@ -4312,6 +4997,8 @@
         name: "",
         reminderTime: "20:00",
         weights: [],            // [{dateISO, kg}]
+        alcoholLog: [],         // [{dateISO, type, units} or {id, dateISO, type, units}]
+        joggeturLog: [],        // [{id, dateISO, distanse, minutter, sekunder, snittpuls, makspuls, mood, intervall, motbakke, notat}]
         logs: [],               // [{id, dateISO, title, length, pkg, label, mood, notes}]
         dayStatus: {},          // dateISO -> {status, label, length, pkg}
         exerciseSetLogs: [],    // [{dato, ovelse, sett: [{settNr, vekt, reps}]}]
@@ -4319,6 +5006,13 @@
         extraWorkoutsByDay: {}, // dateISO -> [{ fromDate, label, length, pkg }]
         innkjoringStartDate: null, // ISO date, null = ikke satt
       };
+
+      const ALCOHOL_OPTIONS = [
+        { value: "øl033", label: "Øl 0,33 (1 enhet)", units: 1 },
+        { value: "øl05", label: "Øl 0,5 (1,5 enheter)", units: 1.5 },
+        { value: "vinglass", label: "Vin glass (1,5 enheter)", units: 1.5 },
+        { value: "brennevin", label: "Brennevin 4cl (1 enhet)", units: 1 }
+      ];
 
       let state = structuredClone ? structuredClone(defaultState) : JSON.parse(JSON.stringify(defaultState));
       let selectedWeekDateISO = null;
@@ -4333,7 +5027,13 @@
       let resetDayISO = null;
       let lastResetDayISO = null;
       let noWorkoutContextDateISO = null;
+      let continueOrNewPending = null;
+      let logCalendarYear = null;
+      let logCalendarMonth = null;
+      let logDayDetailDateISO = null;
       let setLogState = { exerciseName: "", totalSets: 1, currentSet: 1, loggedSets: [], dateISO: "" };
+      const TIMER_RING_CIRCUMFERENCE = 2 * Math.PI * 54;
+      let timerState = { phase: "idle", workSec: 45, rounds: 3, restSec: 15, currentRound: 1, remainingMs: 0, totalPhaseMs: 0, intervalId: null, blinkTimeoutIds: [] };
       function loadState() {
         try {
           const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -4487,6 +5187,24 @@
         const d = dato instanceof Date ? dato : new Date(String(dato).slice(0, 10) + "T12:00:00");
         const ukedag = d.getDay();
         return STANDARD_UKEPLAN[ukedag];
+      }
+
+      var MORGENOKT_OPTIONS = ["Roing", "Spinning", "Tibetanske riter", "Yoga", "Mageøvelser"];
+      function getMorgenoktKey(dateISO) {
+        return "morgenokt_" + (dateISO || toISODate(new Date()));
+      }
+      function getMorgenoktForDato(dateISO) {
+        try {
+          return localStorage.getItem(getMorgenoktKey(dateISO));
+        } catch (e) {
+          return null;
+        }
+      }
+      function setMorgenoktForDato(dateISO, value) {
+        try {
+          if (value) localStorage.setItem(getMorgenoktKey(dateISO), value);
+          else localStorage.removeItem(getMorgenoktKey(dateISO));
+        } catch (e) {}
       }
 
       function getCurrentDay() {
@@ -4886,7 +5604,7 @@
           const videoBtn = document.createElement("button");
           videoBtn.type = "button";
           videoBtn.className = "btn btn-video";
-          videoBtn.textContent = "▶ Video";
+          videoBtn.textContent = "▶ Info";
           videoBtn.addEventListener("click", () => {
             openVideoInNewTab(buildExerciseVideoUrl(ex));
           });
@@ -4915,7 +5633,7 @@
             if (existingAlt) {
               existingAlt.remove();
             }
-            const alternatives = findAlternativeExercises(ex.muskelgruppe, ex.navn, 3);
+            const alternatives = findAlternativeExercises(ex.muskelgruppe, ex.navn, 50);
             const altContainer = document.createElement("div");
             altContainer.className = "exercise-alt-list";
             if (!alternatives.length) {
@@ -4923,15 +5641,21 @@
               txt.textContent = "Ingen alternative øvelser funnet for denne muskelgruppen enda.";
               altContainer.appendChild(txt);
             } else {
-              const label = document.createElement("span");
-              label.textContent = "Alternativer:";
-              altContainer.appendChild(label);
-              alternatives.forEach(alt => {
-                const chip = document.createElement("button");
-                chip.type = "button";
-                chip.className = "exercise-alt-chip";
-                chip.textContent = alt.navn;
-                chip.addEventListener("click", () => {
+              const sel = document.createElement("select");
+              alternatives.forEach(function(alt, i) {
+                const opt = document.createElement("option");
+                opt.value = i;
+                opt.textContent = i === 0 ? "⭐ Anbefalt: " + (alt.navn || "Øvelse") : (alt.navn || "Øvelse");
+                sel.appendChild(opt);
+              });
+              const confirmBtn = document.createElement("button");
+              confirmBtn.type = "button";
+              confirmBtn.className = "btn btn-ghost bytt-confirm-btn";
+              confirmBtn.textContent = "Bytt";
+              confirmBtn.addEventListener("click", () => {
+                var idx = parseInt(sel.value, 10);
+                if (!isNaN(idx) && alternatives[idx]) {
+                  var alt = alternatives[idx];
                   ex.navn = alt.navn;
                   ex.settReps = alt.settReps;
                   ex.utstyr = alt.utstyr;
@@ -4939,9 +5663,10 @@
                   ex.skadenotat = alt.skadenotat;
                   ex.videoSok = alt.videoSok;
                   renderExercisesForSelection(lengthLabel, pkgKey);
-                });
-                altContainer.appendChild(chip);
+                }
               });
+              altContainer.appendChild(sel);
+              altContainer.appendChild(confirmBtn);
             }
             item.appendChild(altContainer);
           });
@@ -5059,6 +5784,8 @@
           currentWorkoutDayType = null;
           if (bannerEl) bannerEl.style.display = "none";
           if (anbefaltEl) anbefaltEl.style.display = "none";
+          var oppvarmingHide = document.getElementById("workoutScreenOppvarming");
+          if (oppvarmingHide) { oppvarmingHide.style.display = "none"; oppvarmingHide.innerHTML = ""; }
         } else {
           titleEl.textContent = data.levelNavn || "Økt";
           durationEl.textContent = (data.minutter && data.minutter > 0) ? (data.minutter + " min") : "Varierer";
@@ -5068,6 +5795,35 @@
             currentWorkoutExercises = flatExs;
           } else {
             currentWorkoutExercises = (data.exercises || []).map(function(ex) { return { navn: ex.navn, settReps: ex.settReps, utstyr: ex.utstyr, skadenotat: ex.skadenotat, videoSok: ex.videoSok, muskelgruppe: ex.muskelgruppe }; });
+          }
+          var oppvarmingEl = document.getElementById("workoutScreenOppvarming");
+          if (oppvarmingEl) {
+            if (dagNokkel === "mandag" || dagNokkel === "onsdag" || dagNokkel === "fredag") {
+              var dateISO = currentWorkoutSelection.dateISO;
+              var oppvarmingKey = "oppvarming_" + dateISO;
+              oppvarmingEl.innerHTML = "";
+              var oppvarmingTitle = document.createElement("div");
+              oppvarmingTitle.className = "workout-screen-oppvarming-title";
+              oppvarmingTitle.textContent = "Oppvarming – 20 min";
+              var oppvarmingSelect = document.createElement("select");
+              oppvarmingSelect.className = "workout-screen-oppvarming-select";
+              var validOppvarming = ["Spinning", "Romaskin", "Airbike", "Tredemølle", "Hoppetau"];
+              validOppvarming.forEach(function(opt) {
+                var o = document.createElement("option");
+                o.value = opt;
+                o.textContent = opt;
+                oppvarmingSelect.appendChild(o);
+              });
+              var savedOppvarming = localStorage.getItem(oppvarmingKey);
+              if (savedOppvarming && validOppvarming.indexOf(savedOppvarming) !== -1) oppvarmingSelect.value = savedOppvarming;
+              oppvarmingSelect.addEventListener("change", function() { localStorage.setItem(oppvarmingKey, oppvarmingSelect.value); });
+              oppvarmingEl.appendChild(oppvarmingTitle);
+              oppvarmingEl.appendChild(oppvarmingSelect);
+              oppvarmingEl.style.display = "block";
+            } else {
+              oppvarmingEl.style.display = "none";
+              oppvarmingEl.innerHTML = "";
+            }
           }
           renderWorkoutScreenExercises();
           var completeBtnEl = document.getElementById("workoutScreenComplete");
@@ -5129,7 +5885,7 @@
         const videoBtn = document.createElement("button");
         videoBtn.type = "button";
         videoBtn.className = "btn btn-video";
-        videoBtn.textContent = "▶ Video";
+        videoBtn.textContent = "▶ Info";
         videoBtn.addEventListener("click", () => { openVideoInNewTab(buildExerciseVideoUrl(ex)); });
         const skipBtn = document.createElement("button");
         skipBtn.type = "button";
@@ -5141,23 +5897,35 @@
         byttBtn.className = "btn btn-bytt";
         byttBtn.textContent = "Bytt";
         byttBtn.addEventListener("click", () => {
-          const alts = findAlternativeExercises(ex.muskelgruppe, ex.navn, 3);
+          const alts = findAlternativeExercises(ex.muskelgruppe, ex.navn, 50);
           const existingAlt = item.querySelector(".exercise-alt-list");
           if (existingAlt) existingAlt.remove();
           const altContainer = document.createElement("div");
           altContainer.className = "exercise-alt-list";
-          if (alts.length === 0) altContainer.textContent = "Ingen alternativer funnet.";
-          else alts.forEach(alt => {
-            const chip = document.createElement("button");
-            chip.type = "button";
-            chip.className = "exercise-alt-chip";
-            chip.textContent = alt.navn;
-            chip.addEventListener("click", () => {
-              currentWorkoutExercises[flatIndex] = { ...alt };
-              renderWorkoutScreenExercises();
+          if (alts.length === 0) {
+            altContainer.textContent = "Ingen alternativer funnet.";
+          } else {
+            const sel = document.createElement("select");
+            alts.forEach(function(alt, i) {
+              const opt = document.createElement("option");
+              opt.value = i;
+              opt.textContent = i === 0 ? "⭐ Anbefalt: " + (alt.navn || "Øvelse") : (alt.navn || "Øvelse");
+              sel.appendChild(opt);
             });
-            altContainer.appendChild(chip);
-          });
+            const confirmBtn = document.createElement("button");
+            confirmBtn.type = "button";
+            confirmBtn.className = "btn btn-bytt bytt-confirm-btn";
+            confirmBtn.textContent = "Bytt";
+            confirmBtn.addEventListener("click", () => {
+              var idx = parseInt(sel.value, 10);
+              if (!isNaN(idx) && alts[idx]) {
+                currentWorkoutExercises[flatIndex] = { ...alts[idx] };
+                renderWorkoutScreenExercises();
+              }
+            });
+            altContainer.appendChild(sel);
+            altContainer.appendChild(confirmBtn);
+          }
           item.appendChild(altContainer);
         });
         const fullforBtn = document.createElement("button");
@@ -5176,9 +5944,36 @@
         parentEl.appendChild(item);
       }
 
+      function getSetLogEntryForExercise(dateISO, exerciseName) {
+        var logs = state.exerciseSetLogs || [];
+        for (var i = 0; i < logs.length; i++) {
+          if (logs[i].dato === dateISO && logs[i].ovelse === exerciseName) return { index: i, entry: logs[i] };
+        }
+        return null;
+      }
+
+      function renderSetLogLoggedSets() {
+        var listEl = document.getElementById("setLogLoggedSetsList");
+        var doneListEl = document.getElementById("setLogDoneLoggedList");
+        var sets = setLogState.loggedSets || [];
+        var html = "";
+        sets.forEach(function(s) {
+          var repStr = (s.reps != null && s.reps !== "") ? (Number(s.reps) === s.reps && s.reps % 1 !== 0 ? s.reps : Math.round(s.reps) + "") : "—";
+          html += "<div class=\"set-log-set-line\">Sett " + (s.settNr || "") + ": " + (s.vekt != null ? s.vekt + " kg" : "—") + " × " + repStr + "</div>";
+        });
+        if (listEl) listEl.innerHTML = html;
+        if (doneListEl) doneListEl.innerHTML = html;
+      }
+
       function openSetLogModal(exerciseName, settReps) {
         var totalSets = parseSetsFromSettReps(settReps);
-        setLogState = { exerciseName: exerciseName, totalSets: totalSets, currentSet: 1, loggedSets: [], dateISO: currentWorkoutSelection ? currentWorkoutSelection.dateISO : toISODate(new Date()) };
+        var dateISO = currentWorkoutSelection ? currentWorkoutSelection.dateISO : toISODate(new Date());
+        setLogState = { exerciseName: exerciseName, totalSets: totalSets, currentSet: 1, loggedSets: [], dateISO: dateISO };
+        var existing = getSetLogEntryForExercise(dateISO, exerciseName);
+        if (existing && existing.entry.sett && existing.entry.sett.length > 0) {
+          setLogState.loggedSets = existing.entry.sett.slice();
+          setLogState.currentSet = setLogState.loggedSets.length + 1;
+        }
         var modal = document.getElementById("setLogModal");
         var titleEl = document.getElementById("setLogModalTitle");
         var bodyEl = document.getElementById("setLogModalBody");
@@ -5188,12 +5983,19 @@
         var repsInput = document.getElementById("setLogReps");
         if (!modal || !titleEl || !bodyEl || !doneMsg || !counterEl || !vektInput || !repsInput) return;
         titleEl.textContent = exerciseName;
-        doneMsg.style.display = "none";
-        bodyEl.style.display = "block";
         vektInput.value = "";
         repsInput.value = "";
         repsInput.placeholder = totalSets > 1 ? "12" : (settReps && settReps.indexOf("sek") !== -1 ? "30" : "12");
-        updateSetLogModalContent();
+        if (setLogState.currentSet > setLogState.totalSets) {
+          doneMsg.style.display = "block";
+          if (bodyEl) bodyEl.style.display = "none";
+          renderSetLogLoggedSets();
+        } else {
+          doneMsg.style.display = "none";
+          if (bodyEl) bodyEl.style.display = "block";
+          updateSetLogModalContent();
+          renderSetLogLoggedSets();
+        }
         modal.style.display = "flex";
       }
 
@@ -5348,20 +6150,46 @@
           var reps = parseFloat((repsInput && repsInput.value) ? repsInput.value.replace(",", ".") : "0", 10) || 0;
           setLogState.loggedSets.push({ settNr: setLogState.currentSet, vekt: vekt, reps: reps });
           setLogState.currentSet++;
-          if (setLogState.currentSet > setLogState.totalSets) {
-            var logs = state.exerciseSetLogs || [];
-            logs.push({ dato: setLogState.dateISO, ovelse: setLogState.exerciseName, sett: setLogState.loggedSets });
+          var logs = state.exerciseSetLogs || [];
+          var found = getSetLogEntryForExercise(setLogState.dateISO, setLogState.exerciseName);
+          if (found) {
+            state.exerciseSetLogs[found.index].sett = setLogState.loggedSets.slice();
+          } else {
+            logs.push({ dato: setLogState.dateISO, ovelse: setLogState.exerciseName, sett: setLogState.loggedSets.slice() });
             state.exerciseSetLogs = logs;
-            saveState();
+          }
+          saveState();
+          if (setLogState.currentSet > setLogState.totalSets) {
             if (bodyEl) bodyEl.style.display = "none";
             if (doneMsg) doneMsg.style.display = "block";
+            renderSetLogLoggedSets();
             setTimeout(closeSetLogModal, 1200);
             return;
           }
           if (vektInput) vektInput.value = "";
           if (repsInput) repsInput.value = "";
           updateSetLogModalContent();
+          renderSetLogLoggedSets();
         });
+        function doSetLogNullstill() {
+          var found = getSetLogEntryForExercise(setLogState.dateISO, setLogState.exerciseName);
+          if (found != null) {
+            state.exerciseSetLogs.splice(found.index, 1);
+            saveState();
+          }
+          setLogState.loggedSets = [];
+          setLogState.currentSet = 1;
+          if (bodyEl) bodyEl.style.display = "block";
+          if (doneMsg) doneMsg.style.display = "none";
+          if (vektInput) vektInput.value = "";
+          if (repsInput) repsInput.value = "";
+          updateSetLogModalContent();
+          renderSetLogLoggedSets();
+        }
+        var nullstillBtn = document.getElementById("setLogNullstillBtn");
+        if (nullstillBtn) nullstillBtn.addEventListener("click", doSetLogNullstill);
+        var nullstillDoneBtn = document.getElementById("setLogNullstillDoneBtn");
+        if (nullstillDoneBtn) nullstillDoneBtn.addEventListener("click", doSetLogNullstill);
       }
 
       function renderWorkoutScreenExercises() {
@@ -5578,6 +6406,39 @@
         if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) { modal.style.display = "none"; resetDayISO = null; } });
       }
 
+      function initContinueOrNewWorkoutModal() {
+        var modal = document.getElementById("continueOrNewWorkoutModal");
+        var continueBtn = document.getElementById("continueWorkoutBtn");
+        var startNewBtn = document.getElementById("startNewWorkoutBtn");
+        if (!modal) return;
+        if (continueBtn) {
+          continueBtn.addEventListener("click", function() {
+            if (continueOrNewPending) {
+              openedWorkoutFromView = "week";
+              showWorkoutScreen(continueOrNewPending.label, continueOrNewPending.pkg, continueOrNewPending.iso);
+              continueOrNewPending = null;
+            }
+            modal.style.display = "none";
+          });
+        }
+        if (startNewBtn) {
+          startNewBtn.addEventListener("click", function() {
+            if (continueOrNewPending) {
+              state.exerciseSetLogs = (state.exerciseSetLogs || []).filter(function(e) { return e.dato !== continueOrNewPending.iso; });
+              setLogState = { exerciseName: "", totalSets: 1, currentSet: 1, loggedSets: [], dateISO: "" };
+              saveState();
+              openedWorkoutFromView = "week";
+              showWorkoutScreen(continueOrNewPending.label, continueOrNewPending.pkg, continueOrNewPending.iso);
+              continueOrNewPending = null;
+            }
+            modal.style.display = "none";
+          });
+        }
+        modal.addEventListener("click", function(e) {
+          if (e.target === modal) { modal.style.display = "none"; continueOrNewPending = null; }
+        });
+      }
+
       function initWorkoutScreen() {
         const backBtn = document.getElementById("workoutScreenBack");
         const completeBtn = document.getElementById("workoutScreenComplete");
@@ -5698,7 +6559,45 @@
         var dagNokkel = getCurrentDay();
         var lengthGridEl = document.getElementById("homeLengthGrid");
         var daySpecificEl = document.getElementById("homeDaySpecific");
+        var morgenoktBlock = document.getElementById("homeMorgenoktBlock");
         if (!lengthGridEl || !daySpecificEl) return;
+
+        var todayISO = toISODate(new Date());
+        if (morgenoktBlock) {
+          morgenoktBlock.innerHTML = "";
+          var morgenVal = getMorgenoktForDato(todayISO);
+          if (morgenVal) {
+            var doneEl = document.createElement("div");
+            doneEl.className = "morgenokt-done";
+            doneEl.textContent = "Morgenøkt fullført ✓";
+            morgenoktBlock.appendChild(doneEl);
+          } else {
+            var titleEl = document.createElement("div");
+            titleEl.className = "morgenokt-title";
+            titleEl.textContent = "Valgfri morgenøkt – 20 min";
+            morgenoktBlock.appendChild(titleEl);
+            var sel = document.createElement("select");
+            MORGENOKT_OPTIONS.forEach(function(opt) {
+              var o = document.createElement("option");
+              o.value = opt;
+              o.textContent = opt;
+              sel.appendChild(o);
+            });
+            var startBtn = document.createElement("button");
+            startBtn.type = "button";
+            startBtn.className = "btn btn-primary";
+            startBtn.textContent = "Start morgenøkt";
+            startBtn.addEventListener("click", function() {
+              var v = sel.value;
+              if (v) {
+                setMorgenoktForDato(todayISO, v);
+                renderHome();
+              }
+            });
+            morgenoktBlock.appendChild(sel);
+            morgenoktBlock.appendChild(startBtn);
+          }
+        }
 
         if (dagNokkel === "mandag" || dagNokkel === "onsdag" || dagNokkel === "fredag") {
           lengthGridEl.style.display = "";
@@ -5869,6 +6768,14 @@
           statusRow.appendChild(statusWrapper);
           card.appendChild(statusRow);
 
+          var morgenVal = getMorgenoktForDato(iso);
+          if (morgenVal) {
+            var morgenLine = document.createElement("div");
+            morgenLine.className = "week-morgenokt-line";
+            morgenLine.textContent = "Morgenøkt: " + morgenVal + " ✓";
+            card.appendChild(morgenLine);
+          }
+
           if (isToday) {
             const badge = document.createElement("div");
             badge.className = "week-current-badge";
@@ -5938,10 +6845,18 @@
         registerBtn.className = "btn btn-primary";
         registerBtn.textContent = "Registrer økt";
         registerBtn.addEventListener("click", () => {
-          openedWorkoutFromView = "week";
           const dayInfo = state.dayStatus[iso] || { label: "Express", length: 35, pkg: "B" };
-          showWorkoutScreen(dayInfo.label, dayInfo.pkg, iso);
-          modal.style.display = "none";
+          var hasLoggedSets = (state.exerciseSetLogs || []).some(function(e) { return e.dato === iso; });
+          if (hasLoggedSets) {
+            continueOrNewPending = { label: dayInfo.label, pkg: dayInfo.pkg, iso: iso };
+            modal.style.display = "none";
+            var continueModal = document.getElementById("continueOrNewWorkoutModal");
+            if (continueModal) continueModal.style.display = "flex";
+          } else {
+            openedWorkoutFromView = "week";
+            showWorkoutScreen(dayInfo.label, dayInfo.pkg, iso);
+            modal.style.display = "none";
+          }
         });
         container.appendChild(registerBtn);
 
@@ -5960,6 +6875,44 @@
           if (noWorkoutTitle) noWorkoutTitle.textContent = iso === todayISO ? "Hva skjedde i dag?" : "Hva skjedde denne dagen?";
         });
         container.appendChild(noWorkoutBtn);
+
+        var morgenValWeek = getMorgenoktForDato(iso);
+        var morgenWrap = document.createElement("div");
+        morgenWrap.className = "morgenokt-block";
+        morgenWrap.style.marginTop = "12px";
+        if (morgenValWeek) {
+          var morgenDoneTxt = document.createElement("div");
+          morgenDoneTxt.className = "morgenokt-done";
+          morgenDoneTxt.textContent = "Morgenøkt: " + morgenValWeek + " ✓";
+          morgenWrap.appendChild(morgenDoneTxt);
+        } else {
+          var morgenLabel = document.createElement("div");
+          morgenLabel.className = "morgenokt-title";
+          morgenLabel.textContent = "Valgfri morgenøkt – 20 min";
+          morgenWrap.appendChild(morgenLabel);
+          var morgenSel = document.createElement("select");
+          MORGENOKT_OPTIONS.forEach(function(opt) {
+            var o = document.createElement("option");
+            o.value = opt;
+            o.textContent = opt;
+            morgenSel.appendChild(o);
+          });
+          var morgenRegBtn = document.createElement("button");
+          morgenRegBtn.type = "button";
+          morgenRegBtn.className = "btn btn-outline";
+          morgenRegBtn.textContent = "Registrer morgenøkt";
+          morgenRegBtn.addEventListener("click", function() {
+            var v = morgenSel.value;
+            if (v) {
+              setMorgenoktForDato(iso, v);
+              renderWeek();
+              openWeekDayActionModal(iso);
+            }
+          });
+          morgenWrap.appendChild(morgenSel);
+          morgenWrap.appendChild(morgenRegBtn);
+        }
+        container.appendChild(morgenWrap);
 
         if (status === "fullført" || status === "skippet") {
           const resetBtn = document.createElement("button");
@@ -6012,6 +6965,7 @@
       }
 
       function completeWorkoutForDate(dateISO, label, length, pkg, moodOverride, notesOverride) {
+        setLogState = { exerciseName: "", totalSets: 1, currentSet: 1, loggedSets: [], dateISO: "" };
         state.dayStatus[dateISO] = {
           status: "fullført",
           label,
@@ -6020,7 +6974,18 @@
         };
         const mood = moodOverride || "💪";
         const notes = (notesOverride != null && typeof notesOverride === "string") ? notesOverride.trim() : "";
-        addWorkoutLog(dateISO, label, length, pkg, mood, notes);
+        var existing = (state.logs || []).find(function(l) { return l.dateISO === dateISO && !l.skipped; });
+        if (existing) {
+          existing.label = label;
+          existing.length = length;
+          existing.pkg = pkg;
+          existing.title = label + " – pakke " + pkg;
+          existing.mood = mood;
+          existing.notes = notes;
+          renderLog();
+        } else {
+          addWorkoutLog(dateISO, label, length, pkg, mood, notes);
+        }
         var okt = getOktForDato(new Date(dateISO + "T12:00:00"));
         if (okt && okt.dag) {
           var lengdeNorm = normalizeLengthLabel(label);
@@ -6070,36 +7035,43 @@
 
         if (!logList || !logSummaryLabel || !graphRows || !graphContainer) return;
 
-        const logs = [...state.logs].sort((a, b) => {
-          if (a.dateISO === b.dateISO) return b.id - a.id;
-          return a.dateISO < b.dateISO ? 1 : -1;
+        const normalLogs = [...(state.logs || [])].map(function(l) { return { ...l, joggetur: false }; });
+        const joggeturItems = (state.joggeturLog || []).map(function(j) {
+          return { id: j.id, dateISO: j.dateISO, joggetur: true, title: "Joggetur", mood: j.mood || "💪", distanse: j.distanse, minutter: j.minutter, sekunder: j.sekunder, notes: j.notat || "" };
+        });
+        const combined = normalLogs.concat(joggeturItems).sort(function(a, b) {
+          if (a.dateISO === b.dateISO) return (b.id || 0) - (a.id || 0);
+          return a.dateISO > b.dateISO ? -1 : 1;
         });
 
-        if (logs.length === 0) {
+        if (combined.length === 0) {
           logList.innerHTML = "";
           const empty = document.createElement("div");
           empty.className = "log-notes log-notes-empty";
           empty.textContent = "Ingen økter registrert enda. Fullfør en økt fra Hjem eller Uke for å se den her.";
           logList.appendChild(empty);
 
-          graphRows.innerHTML = "";
-          const graphEmpty = document.createElement("div");
-          graphEmpty.className = "weight-empty";
-          graphEmpty.textContent = "Når du har gjennomført flere økter vil du se et enkelt ukesdiagram her.";
-          graphRows.appendChild(graphEmpty);
-
+          if (logCalendarYear == null || logCalendarMonth == null) {
+            const d = new Date();
+            logCalendarYear = d.getFullYear();
+            logCalendarMonth = d.getMonth() + 1;
+          }
+          renderLogCalendar();
           logSummaryLabel.textContent = "Ingen økter enda";
           renderLogExerciseGraph();
           return;
         }
 
-        const totalMinutes = logs.reduce((sum, l) => sum + (l.length || 0), 0);
-        logSummaryLabel.textContent = `${logs.length} økter • ${totalMinutes} min totalt`;
+        const totalMinutes = combined.reduce(function(sum, e) {
+          return sum + (e.joggetur ? (e.minutter || 0) + (e.sekunder || 0) / 60 : (e.length || 0));
+        }, 0);
+        logSummaryLabel.textContent = combined.length + " økter • " + Math.round(totalMinutes) + " min totalt";
 
         logList.innerHTML = "";
-        logs.forEach(entry => {
+        combined.forEach(function(entry) {
           const row = document.createElement("div");
           row.className = entry.skipped ? "log-item log-item-skipped" : "log-item";
+          row.dataset.dateISO = entry.dateISO;
 
           const mood = document.createElement("div");
           mood.className = "log-mood";
@@ -6109,7 +7081,7 @@
           titleRow.className = "log-title-row";
 
           const title = document.createElement("div");
-          title.textContent = entry.title || "Økt";
+          title.textContent = entry.joggetur ? "Joggetur" : (entry.title || "Økt");
 
           const date = new Date(entry.dateISO + "T12:00:00");
           const dateSpan = document.createElement("div");
@@ -6118,10 +7090,13 @@
 
           const meta = document.createElement("div");
           meta.className = "log-meta";
-          if (entry.skipped) {
+          if (entry.joggetur) {
+            var tidStr = (entry.minutter || 0) + ":" + (String(entry.sekunder || 0).padStart(2, "0"));
+            meta.textContent = (entry.distanse != null ? entry.distanse + " km" : "—") + " • " + tidStr;
+          } else if (entry.skipped) {
             meta.textContent = entry.skipReason || "Ingen trening";
           } else {
-            meta.textContent = `${entry.length || 0} min • Pakke ${entry.pkg || "?"}`;
+            meta.textContent = (entry.length || 0) + " min • Pakke " + (entry.pkg || "?");
           }
 
           titleRow.appendChild(title);
@@ -6132,54 +7107,27 @@
           if (entry.notes && entry.notes.trim()) {
             notes.textContent = entry.notes;
           } else {
-            notes.textContent = entry.skipped ? "" : "Ingen notat (trykk «Notat» for å legge til).";
-            if (!entry.skipped) notes.classList.add("log-notes-empty");
+            notes.textContent = entry.skipped ? "" : "Ingen notat.";
+            if (!entry.skipped && !entry.joggetur) notes.classList.add("log-notes-empty");
           }
 
           const actions = document.createElement("div");
           actions.className = "log-actions-row";
 
-          if (!entry.skipped) {
-            const moodPicker = document.createElement("div");
-            moodPicker.className = "mood-picker";
-            const moods = ["😴", "😐", "💪", "🔥"];
-            moods.forEach(m => {
-              const btn = document.createElement("button");
-              btn.type = "button";
-              btn.className = "mood-btn";
-              if (entry.mood === m) btn.classList.add("mood-btn-active");
-              btn.textContent = m;
-              btn.addEventListener("click", () => {
-                entry.mood = m;
-                saveState();
-                renderLog();
-              });
-              moodPicker.appendChild(btn);
-            });
-
-            const noteBtn = document.createElement("button");
-            noteBtn.type = "button";
-            noteBtn.className = "btn btn-ghost";
-            noteBtn.textContent = "Notat";
-            noteBtn.addEventListener("click", () => {
-              const current = entry.notes || "";
-              const val = window.prompt("Notat for økten:", current);
-              if (val === null) return;
-              entry.notes = val.trim();
-              saveState();
-              renderLog();
-            });
-            actions.appendChild(moodPicker);
-            actions.appendChild(noteBtn);
-          }
-
           const deleteBtn = document.createElement("button");
           deleteBtn.type = "button";
           deleteBtn.className = "btn btn-ghost";
           deleteBtn.textContent = "Slett";
-          deleteBtn.addEventListener("click", () => {
-            openDeleteModal(entry.id);
-          });
+          if (entry.joggetur) {
+            deleteBtn.addEventListener("click", function() {
+              state.joggeturLog = (state.joggeturLog || []).filter(function(j) { return j.id !== entry.id; });
+              saveState();
+              renderLog();
+              renderLogCalendar();
+            });
+          } else {
+            deleteBtn.addEventListener("click", function() { openDeleteModal(entry.id); });
+          }
           actions.appendChild(deleteBtn);
 
           row.appendChild(mood);
@@ -6190,55 +7138,274 @@
           logList.appendChild(row);
         });
 
-        const weekCounts = {};
+        if (logCalendarYear == null || logCalendarMonth == null) {
+          const d = new Date();
+          logCalendarYear = d.getFullYear();
+          logCalendarMonth = d.getMonth() + 1;
+        }
+        renderLogCalendar();
+        renderLogExerciseGraph();
+      }
+
+      const LOG_CALENDAR_MONTH_NAMES = ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"];
+
+      function renderLogCalendar() {
+        const navEl = document.getElementById("logCalendarNav");
+        const graphRows = document.getElementById("graphRows");
+        const logList = document.getElementById("logList");
+        if (!navEl || !graphRows) return;
+
+        const year = logCalendarYear;
+        const month = logCalendarMonth;
+        const monthName = LOG_CALENDAR_MONTH_NAMES[month - 1];
+        const todayISO = toISODate(new Date());
+
+        navEl.innerHTML = "";
+        const prevBtn = document.createElement("button");
+        prevBtn.type = "button";
+        prevBtn.setAttribute("aria-label", "Forrige måned");
+        prevBtn.textContent = "‹";
+        prevBtn.addEventListener("click", () => {
+          if (logCalendarMonth === 1) {
+            logCalendarMonth = 12;
+            logCalendarYear--;
+          } else {
+            logCalendarMonth--;
+          }
+          renderLogCalendar();
+        });
+        const titleSpan = document.createElement("span");
+        titleSpan.textContent = monthName + " " + year;
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.setAttribute("aria-label", "Neste måned");
+        nextBtn.textContent = "›";
+        nextBtn.addEventListener("click", () => {
+          if (logCalendarMonth === 12) {
+            logCalendarMonth = 1;
+            logCalendarYear++;
+          } else {
+            logCalendarMonth++;
+          }
+          renderLogCalendar();
+        });
+        navEl.appendChild(prevBtn);
+        navEl.appendChild(titleSpan);
+        navEl.appendChild(nextBtn);
+
+        const logs = state.logs || [];
+        const dateToStatus = {};
         logs.forEach(entry => {
-          if (entry.skipped) return;
-          const date = new Date(entry.dateISO + "T12:00:00");
-          const { year, week } = getISOWeekNumber(date);
-          const key = `${year}-U${week}`;
-          weekCounts[key] = (weekCounts[key] || 0) + 1;
+          const iso = entry.dateISO;
+          if (!dateToStatus[iso] || entry.skipped) dateToStatus[iso] = entry.skipped ? "skipped" : "done";
         });
 
-        const entries = Object.entries(weekCounts).sort((a, b) => (a[0] < b[0] ? 1 : -1)).slice(0, 5);
+        const firstDay = new Date(year, month - 1, 1);
+        const daysInMonth = new Date(year, month, 0).getDate();
+        let startWeekday = firstDay.getDay();
+        startWeekday = (startWeekday + 6) % 7;
+
         graphRows.innerHTML = "";
-        if (entries.length === 0) {
-          const graphEmpty = document.createElement("div");
-          graphEmpty.className = "weight-empty";
-          graphEmpty.textContent = "Diagrammet dukker opp når du har noen økter logget.";
-          graphRows.appendChild(graphEmpty);
+        const weekdaysRow = document.createElement("div");
+        weekdaysRow.className = "log-calendar-weekdays";
+        ["M", "T", "O", "T", "F", "L", "S"].forEach(letter => {
+          const cell = document.createElement("div");
+          cell.textContent = letter;
+          weekdaysRow.appendChild(cell);
+        });
+        graphRows.appendChild(weekdaysRow);
+
+        const daysGrid = document.createElement("div");
+        daysGrid.className = "log-calendar-days";
+
+        for (let i = 0; i < startWeekday; i++) {
+          const empty = document.createElement("div");
+          empty.className = "log-cal-day log-cal-day--empty";
+          empty.textContent = "";
+          daysGrid.appendChild(empty);
+        }
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dateISO = year + "-" + String(month).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+          const status = dateToStatus[dateISO];
+          const isToday = dateISO === todayISO;
+          const hasLog = !!status;
+
+          const cell = document.createElement("div");
+          cell.className = "log-cal-day";
+          if (status === "done") cell.classList.add("log-cal-day--done");
+          if (status === "skipped") cell.classList.add("log-cal-day--skipped");
+          if (isToday) cell.classList.add("log-cal-day--today");
+          const hasJoggetur = (state.joggeturLog || []).some(function(j) { return j.dateISO === dateISO; });
+          if (hasJoggetur) cell.classList.add("log-cal-day--joggetur");
+          if (hasLog) {
+            cell.classList.add("log-cal-day--clickable");
+            cell.dataset.dateISO = dateISO;
+          }
+          cell.textContent = d;
+          if (hasLog) {
+            cell.addEventListener("click", () => openLogDayDetailModal(dateISO));
+          }
+          daysGrid.appendChild(cell);
+        }
+
+        graphRows.appendChild(daysGrid);
+      }
+
+      function openLogDayDetailModal(dateISO) {
+        const entry = (state.logs || []).find(l => l.dateISO === dateISO);
+        if (!entry) return;
+        logDayDetailDateISO = dateISO;
+        const titleEl = document.getElementById("logDayDetailTitle");
+        const durationEl = document.getElementById("logDayDetailDuration");
+        const packageEl = document.getElementById("logDayDetailPackage");
+        const moodEl = document.getElementById("logDayDetailMood");
+        if (titleEl) titleEl.textContent = entry.title || "Økt";
+        if (durationEl) durationEl.textContent = entry.skipped ? "—" : "Varighet: " + (entry.length || 0) + " min";
+        if (packageEl) packageEl.textContent = entry.skipped ? (entry.skipReason || "Ingen trening") : "Pakke: " + (entry.pkg || "—");
+        if (moodEl) moodEl.textContent = "Dagsform: " + (entry.mood || "💪");
+        const modal = document.getElementById("logDayDetailModal");
+        if (modal) modal.style.display = "flex";
+      }
+
+      function closeLogDayDetailModal() {
+        logDayDetailDateISO = null;
+        const modal = document.getElementById("logDayDetailModal");
+        if (modal) modal.style.display = "none";
+      }
+
+      const JOGGETUR_WEIGHT_KG = 84;
+      const JOGGETUR_MET = 8;
+
+      function updateJoggeturCalc() {
+        var dist = parseFloat(document.getElementById("joggeturDistanse").value) || 0;
+        var min = parseInt(document.getElementById("joggeturMinutter").value, 10) || 0;
+        var sec = parseInt(document.getElementById("joggeturSekunder").value, 10) || 0;
+        var totalMin = min + sec / 60;
+        var tempoEl = document.getElementById("joggeturTempo");
+        var fartEl = document.getElementById("joggeturFart");
+        var kalEl = document.getElementById("joggeturKalorier");
+        if (dist > 0 && totalMin > 0) {
+          var paceMinPerKm = totalMin / dist;
+          var paceMin = Math.floor(paceMinPerKm);
+          var paceSec = Math.round((paceMinPerKm - paceMin) * 60);
+          if (tempoEl) tempoEl.textContent = paceMin + ":" + (String(paceSec).padStart(2, "0")) + " min/km";
+          var kmPerH = dist / (totalMin / 60);
+          if (fartEl) fartEl.textContent = kmPerH.toFixed(2) + " km/t";
+          var timeHours = totalMin / 60;
+          var cal = JOGGETUR_MET * JOGGETUR_WEIGHT_KG * timeHours;
+          if (kalEl) kalEl.textContent = Math.round(cal) + " kcal";
         } else {
-          const maxCount = entries.reduce((m, [, count]) => Math.max(m, count), 1);
-          entries.forEach(([key, count]) => {
-            const [yearStr, ukeStr] = key.split("-U");
-            const label = `Uke ${ukeStr} ${yearStr}`;
-            const row = document.createElement("div");
-            row.className = "graph-row";
+          if (tempoEl) tempoEl.textContent = "—";
+          if (fartEl) fartEl.textContent = "—";
+          if (kalEl) kalEl.textContent = "—";
+        }
+      }
 
-            const labelSpan = document.createElement("div");
-            labelSpan.className = "graph-label";
-            labelSpan.textContent = label;
+      function openJoggeturLogModal() {
+        document.getElementById("joggeturDistanse").value = "";
+        document.getElementById("joggeturMinutter").value = "";
+        document.getElementById("joggeturSekunder").value = "";
+        document.getElementById("joggeturSnittpuls").value = "";
+        document.getElementById("joggeturMakspuls").value = "";
+        document.getElementById("joggeturNotat").value = "";
+        document.getElementById("joggeturIntervall").checked = false;
+        document.getElementById("joggeturMotbakke").checked = false;
+        document.querySelectorAll(".joggetur-mood-btn").forEach(function(btn) {
+          btn.classList.toggle("joggetur-mood-active", btn.dataset.mood === "💪");
+        });
+        updateJoggeturCalc();
+        document.getElementById("joggeturLogModal").style.display = "flex";
+      }
 
-            const barOuter = document.createElement("div");
-            barOuter.className = "graph-bar-outer";
+      function closeJoggeturLogModal() {
+        document.getElementById("joggeturLogModal").style.display = "none";
+      }
 
-            const barInner = document.createElement("div");
-            barInner.className = "graph-bar-inner";
-            const width = 12 + (count / maxCount) * 80;
-            barInner.style.width = clamp(width, 12, 100) + "%";
-            barOuter.appendChild(barInner);
-
-            const valueSpan = document.createElement("div");
-            valueSpan.className = "graph-value";
-            valueSpan.textContent = count;
-
-            row.appendChild(labelSpan);
-            row.appendChild(barOuter);
-            row.appendChild(valueSpan);
-
-            graphRows.appendChild(row);
+      function initJoggeturModal() {
+        var btn = document.getElementById("joggeturLogBtn");
+        var modal = document.getElementById("joggeturLogModal");
+        var closeBtn = document.getElementById("joggeturModalClose");
+        var cancelBtn = document.getElementById("joggeturModalCancel");
+        var saveBtn = document.getElementById("joggeturModalSave");
+        if (!btn || !modal) return;
+        btn.addEventListener("click", openJoggeturLogModal);
+        if (closeBtn) closeBtn.addEventListener("click", closeJoggeturLogModal);
+        if (cancelBtn) cancelBtn.addEventListener("click", closeJoggeturLogModal);
+        modal.addEventListener("click", function(e) { if (e.target === modal) closeJoggeturLogModal(); });
+        ["joggeturDistanse", "joggeturMinutter", "joggeturSekunder"].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.addEventListener("input", updateJoggeturCalc);
+        });
+        document.querySelectorAll(".joggetur-mood-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            document.querySelectorAll(".joggetur-mood-btn").forEach(function(b) { b.classList.remove("joggetur-mood-active"); });
+            btn.classList.add("joggetur-mood-active");
+          });
+        });
+        if (saveBtn) {
+          saveBtn.addEventListener("click", function() {
+            var distanse = parseFloat(document.getElementById("joggeturDistanse").value);
+            var minutter = parseInt(document.getElementById("joggeturMinutter").value, 10);
+            var sekunder = parseInt(document.getElementById("joggeturSekunder").value, 10);
+            if (isNaN(distanse) || distanse <= 0) {
+              window.alert("Oppgi distanse i km (f.eks. 5).");
+              return;
+            }
+            if (isNaN(minutter)) minutter = 0;
+            if (isNaN(sekunder)) sekunder = 0;
+            if (minutter === 0 && sekunder === 0) {
+              window.alert("Oppgi tid (minutter og/eller sekunder).");
+              return;
+            }
+            var moodBtn = document.querySelector(".joggetur-mood-btn.joggetur-mood-active");
+            var mood = moodBtn ? moodBtn.dataset.mood : "💪";
+            state.joggeturLog = state.joggeturLog || [];
+            state.joggeturLog.push({
+              id: Date.now() + Math.random(),
+              dateISO: toISODate(new Date()),
+              distanse: distanse,
+              minutter: minutter,
+              sekunder: sekunder,
+              snittpuls: parseInt(document.getElementById("joggeturSnittpuls").value, 10) || null,
+              makspuls: parseInt(document.getElementById("joggeturMakspuls").value, 10) || null,
+              mood: mood,
+              intervall: document.getElementById("joggeturIntervall").checked,
+              motbakke: document.getElementById("joggeturMotbakke").checked,
+              notat: (document.getElementById("joggeturNotat").value || "").trim()
+            });
+            saveState();
+            closeJoggeturLogModal();
+            renderLog();
+            renderLogCalendar();
+            renderHome();
           });
         }
-        renderLogExerciseGraph();
+      }
+
+      function initLogDayDetailModal() {
+        const modal = document.getElementById("logDayDetailModal");
+        const closeBtn = document.getElementById("logDayDetailClose");
+        const seFullLoggBtn = document.getElementById("logDayDetailSeFullLogg");
+        if (!modal) return;
+        if (closeBtn) closeBtn.addEventListener("click", closeLogDayDetailModal);
+        modal.addEventListener("click", function(e) {
+          if (e.target === modal) closeLogDayDetailModal();
+        });
+        if (seFullLoggBtn) {
+          seFullLoggBtn.addEventListener("click", function() {
+            const dateISO = logDayDetailDateISO;
+            closeLogDayDetailModal();
+            if (dateISO) {
+              const logList = document.getElementById("logList");
+              const target = logList && logList.querySelector('[data-date-iso="' + dateISO + '"]');
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "center" });
+                target.classList.add("log-list-item-highlight");
+                setTimeout(function() { target.classList.remove("log-list-item-highlight"); }, 2000);
+              }
+            }
+          });
+        }
       }
 
       function renderLogExerciseGraph() {
@@ -6511,9 +7678,109 @@
             });
           }
         }
+
+        const alcoholLog = state.alcoholLog || [];
+        const alcoholWeeklyWrap = document.getElementById("alcoholLogWeeklyWrap");
+        const alcoholWarningBanner = document.getElementById("alcoholLogWarningBanner");
+        const alcoholLogListEl = document.getElementById("alcoholLogList");
+        const today = new Date();
+        const thisWeek = getISOWeekNumber(today);
+
+        if (alcoholWeeklyWrap) {
+          const byWeek = {};
+          alcoholLog.forEach(entry => {
+            const d = new Date(entry.dateISO + "T12:00:00");
+            const { year, week } = getISOWeekNumber(d);
+            const key = year + "-W" + week;
+            if (!byWeek[key]) byWeek[key] = { year, week, units: 0 };
+            byWeek[key].units += entry.units || 0;
+          });
+          const last4WeekKeys = [];
+          for (let i = 0; i < 4; i++) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - 7 * i);
+            const { year, week } = getISOWeekNumber(d);
+            last4WeekKeys.push(year + "-W" + week);
+          }
+          alcoholWeeklyWrap.innerHTML = "";
+          last4WeekKeys.forEach(key => {
+            const row = document.createElement("div");
+            row.className = "alcohol-log-weekly-row";
+            const parts = key.split("-W");
+            const y = parts[0];
+            const wk = parts[1] || "";
+            const units = (byWeek[key] && byWeek[key].units) || 0;
+            row.textContent = "Uke " + wk + " " + y + ": " + (units.toFixed(1).replace(".", ",")) + " enheter";
+            alcoholWeeklyWrap.appendChild(row);
+          });
+        }
+
+        const thisWeekKey = thisWeek.year + "-W" + thisWeek.week;
+        const thisWeekEntries = alcoholLog.filter(e => {
+          const { year, week } = getISOWeekNumber(new Date(e.dateISO + "T12:00:00"));
+          return year === thisWeek.year && week === thisWeek.week;
+        });
+        const thisWeekUnits = thisWeekEntries.reduce((s, e) => s + (e.units || 0), 0);
+        const daysWithAlcoholThisWeek = new Set(thisWeekEntries.map(e => e.dateISO)).size;
+        const alcoholFreeDaysThisWeek = 7 - Math.min(7, daysWithAlcoholThisWeek);
+        const showOver15 = thisWeekUnits > 15;
+        const showFewFreeDays = alcoholFreeDaysThisWeek < 2;
+        if (alcoholWarningBanner) {
+          if (showOver15 || showFewFreeDays) {
+            alcoholWarningBanner.style.display = "block";
+            const parts = [];
+            if (showOver15) parts.push("Over 15 enheter denne uken (" + thisWeekUnits.toFixed(1).replace(".", ",") + ").");
+            if (showFewFreeDays) parts.push("Færre enn 2 alkoholfrie dager denne uken.");
+            alcoholWarningBanner.textContent = parts.join(" ");
+          } else {
+            alcoholWarningBanner.style.display = "none";
+          }
+        }
+
+        if (alcoholLogListEl) {
+          alcoholLogListEl.innerHTML = "";
+          const listOrder = [...alcoholLog].sort((a, b) => (a.dateISO === b.dateISO ? 0 : a.dateISO > b.dateISO ? -1 : 1));
+          if (listOrder.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "weight-empty";
+            empty.textContent = "Ingen alkoholregistreringer.";
+            alcoholLogListEl.appendChild(empty);
+          } else {
+            listOrder.forEach(entry => {
+              const row = document.createElement("div");
+              row.className = "alcohol-log-item";
+              const d = new Date(entry.dateISO + "T12:00:00");
+              const dateStr = d.toLocaleDateString("nb-NO", { day: "2-digit", month: "2-digit", year: "numeric" });
+              const opt = ALCOHOL_OPTIONS.find(o => o.value === entry.type);
+              const typeLabel = opt ? opt.label : entry.type;
+              const unitsStr = (entry.units != null ? entry.units : 0).toFixed(1).replace(".", ",");
+              const left = document.createElement("span");
+              left.textContent = dateStr + " – " + typeLabel + " (" + unitsStr + " enheter)";
+              const delBtn = document.createElement("button");
+              delBtn.type = "button";
+              delBtn.className = "alcohol-log-item-delete";
+              delBtn.setAttribute("aria-label", "Slett");
+              delBtn.textContent = "🗑️";
+              const entryId = entry.id;
+              delBtn.addEventListener("click", () => {
+                if (entryId !== undefined) {
+                  state.alcoholLog = (state.alcoholLog || []).filter(e => e.id !== entryId);
+                } else {
+                  const idx = (state.alcoholLog || []).findIndex(e => e.dateISO === entry.dateISO && e.type === entry.type && e.units === entry.units);
+                  if (idx !== -1) state.alcoholLog.splice(idx, 1);
+                }
+                saveState();
+                renderSettings();
+              });
+              row.appendChild(left);
+              row.appendChild(delBtn);
+              alcoholLogListEl.appendChild(row);
+            });
+          }
+        }
       }
 
-      const TAB_ORDER = ["home", "week", "log", "settings"];
+      const TAB_ORDER = ["home", "week", "log", "timer", "settings"];
       let currentSwipeIndex = 0;
 
       function getSwipeContainer() {
@@ -6544,7 +7811,7 @@
           btn.classList.toggle("nav-btn-active", isTarget);
         });
 
-        setSwipeTransform(-idx * 25, true);
+        setSwipeTransform(-idx * 20, true);
         if (target === "week") renderWeek();
       }
 
@@ -6584,9 +7851,9 @@
             const curX = e.touches[0].clientX;
             const curY = e.touches[0].clientY;
             const deltaX = curX - touchStartX;
-            const deltaPercent = mainWidth > 0 ? (deltaX / mainWidth) * 25 : 0;
-            let percent = -startIndex * 25 + deltaPercent;
-            percent = Math.max(-75, Math.min(0, percent));
+            const deltaPercent = mainWidth > 0 ? (deltaX / mainWidth) * 20 : 0;
+            let percent = -startIndex * 20 + deltaPercent;
+            percent = Math.max(-80, Math.min(0, percent));
             setSwipeTransform(percent, false);
           }, { passive: true });
 
@@ -6601,7 +7868,7 @@
               newIndex = startIndex - 1;
             }
             currentSwipeIndex = newIndex;
-            setSwipeTransform(-newIndex * 25, true);
+            setSwipeTransform(-newIndex * 20, true);
             const target = TAB_ORDER[newIndex];
             const views = document.querySelectorAll(".view");
             views.forEach(view => {
@@ -6616,6 +7883,175 @@
         }
 
         setSwipeTransform(0, false);
+      }
+
+      function formatTimerMs(ms) {
+        const totalSec = Math.max(0, Math.ceil(ms / 1000));
+        const m = Math.floor(totalSec / 60);
+        const s = totalSec % 60;
+        return m + ":" + (s < 10 ? "0" : "") + s;
+      }
+
+      function updateTimerRingAndDisplay() {
+        const display = document.getElementById("timerDisplay");
+        const ring = document.getElementById("timerRingProgress");
+        const roundLabel = document.getElementById("timerRoundLabel");
+        if (display) display.textContent = formatTimerMs(timerState.remainingMs);
+        if (ring && timerState.totalPhaseMs > 0) {
+          const ratio = Math.max(0, Math.min(1, timerState.remainingMs / timerState.totalPhaseMs));
+          ring.setAttribute("stroke-dashoffset", (1 - ratio) * TIMER_RING_CIRCUMFERENCE);
+        }
+        if (roundLabel) {
+          roundLabel.textContent = (timerState.phase !== "idle" && timerState.rounds > 0) ? ("Runde " + timerState.currentRound + " av " + timerState.rounds) : "";
+        }
+      }
+
+      function startCountdownBlink() {
+        const blinkEl = document.getElementById("timerCountdownBlink");
+        if (!blinkEl) return;
+        blinkEl.style.display = "flex";
+        const nums = [3, 2, 1];
+        nums.forEach((n, i) => {
+          const t = setTimeout(() => {
+            blinkEl.textContent = n;
+            blinkEl.classList.remove("timer-blink-pop");
+            blinkEl.offsetHeight;
+            blinkEl.classList.add("timer-blink-pop");
+            const removePop = setTimeout(() => blinkEl.classList.remove("timer-blink-pop"), 300);
+            timerState.blinkTimeoutIds.push(removePop);
+          }, i * 1000);
+          timerState.blinkTimeoutIds.push(t);
+        });
+        const startT = setTimeout(() => {
+          blinkEl.style.display = "none";
+          blinkEl.textContent = "";
+          timerState.blinkTimeoutIds = [];
+          startWorkPhase();
+        }, 3000);
+        timerState.blinkTimeoutIds.push(startT);
+      }
+
+      function startWorkPhase() {
+        timerState.phase = "work";
+        timerState.totalPhaseMs = timerState.workSec * 1000;
+        timerState.remainingMs = timerState.totalPhaseMs;
+        const ring = document.getElementById("timerRingProgress");
+        if (ring) {
+          ring.classList.remove("timer-ring-rest");
+          ring.style.transition = "none";
+          ring.setAttribute("stroke-dashoffset", "0");
+          requestAnimationFrame(() => { ring.style.transition = ""; });
+        }
+        updateTimerRingAndDisplay();
+        timerState.intervalId = setInterval(() => {
+          timerState.remainingMs -= 100;
+          if (timerState.remainingMs <= 0) {
+            clearInterval(timerState.intervalId);
+            timerState.intervalId = null;
+            if (timerState.currentRound < timerState.rounds) {
+              startRestPhase();
+            } else {
+              timerState.phase = "idle";
+              timerState.remainingMs = timerState.workSec * 1000;
+              timerState.totalPhaseMs = timerState.workSec * 1000;
+              updateTimerRingAndDisplay();
+              const rl = document.getElementById("timerRoundLabel");
+              if (rl) rl.textContent = "";
+              setTimerInputsEnabled(true);
+            }
+            return;
+          }
+          updateTimerRingAndDisplay();
+        }, 100);
+      }
+
+      function startRestPhase() {
+        timerState.phase = "rest";
+        timerState.totalPhaseMs = timerState.restSec * 1000;
+        timerState.remainingMs = timerState.totalPhaseMs;
+        const ring = document.getElementById("timerRingProgress");
+        if (ring) {
+          ring.classList.add("timer-ring-rest");
+          ring.style.transition = "none";
+          ring.setAttribute("stroke-dashoffset", "0");
+          requestAnimationFrame(() => { ring.style.transition = ""; });
+        }
+        updateTimerRingAndDisplay();
+        timerState.intervalId = setInterval(() => {
+          timerState.remainingMs -= 100;
+          if (timerState.remainingMs <= 0) {
+            clearInterval(timerState.intervalId);
+            timerState.intervalId = null;
+            timerState.currentRound++;
+            startWorkPhase();
+            return;
+          }
+          updateTimerRingAndDisplay();
+        }, 100);
+      }
+
+      function stopTimer() {
+        timerState.blinkTimeoutIds.forEach(id => clearTimeout(id));
+        timerState.blinkTimeoutIds = [];
+        if (timerState.intervalId) {
+          clearInterval(timerState.intervalId);
+          timerState.intervalId = null;
+        }
+        timerState.phase = "idle";
+        const blinkEl = document.getElementById("timerCountdownBlink");
+        if (blinkEl) { blinkEl.style.display = "none"; blinkEl.textContent = ""; }
+        const ring = document.getElementById("timerRingProgress");
+        if (ring) ring.classList.remove("timer-ring-rest");
+        timerState.remainingMs = timerState.workSec * 1000;
+        timerState.totalPhaseMs = timerState.workSec * 1000;
+        updateTimerRingAndDisplay();
+        const rl = document.getElementById("timerRoundLabel");
+        if (rl) rl.textContent = "";
+        setTimerInputsEnabled(true);
+      }
+
+      function setTimerInputsEnabled(enabled) {
+        const workInput = document.getElementById("timerWorkSec");
+        const roundsInput = document.getElementById("timerRounds");
+        const restInput = document.getElementById("timerRestSec");
+        const doItBtn = document.getElementById("timerDoItBtn");
+        [workInput, roundsInput, restInput].forEach(el => { if (el) el.disabled = !enabled; });
+        if (doItBtn) doItBtn.disabled = !enabled;
+      }
+
+      function initTimerInteractions() {
+        const workInput = document.getElementById("timerWorkSec");
+        const roundsInput = document.getElementById("timerRounds");
+        const restInput = document.getElementById("timerRestSec");
+        const doItBtn = document.getElementById("timerDoItBtn");
+        const resetBtn = document.getElementById("timerResetBtn");
+        if (!doItBtn || !resetBtn) return;
+        timerState.workSec = parseInt(workInput && workInput.value ? workInput.value : 45, 10) || 45;
+        timerState.rounds = parseInt(roundsInput && roundsInput.value ? roundsInput.value : 3, 10) || 3;
+        timerState.restSec = parseInt(restInput && restInput.value ? restInput.value : 15, 10) || 15;
+        timerState.remainingMs = timerState.workSec * 1000;
+        timerState.totalPhaseMs = timerState.workSec * 1000;
+        updateTimerRingAndDisplay();
+        doItBtn.addEventListener("click", () => {
+          if (timerState.phase !== "idle") return;
+          const work = parseInt(workInput && workInput.value ? workInput.value : 45, 10);
+          const rounds = parseInt(roundsInput && roundsInput.value ? roundsInput.value : 3, 10);
+          const rest = parseInt(restInput && restInput.value ? restInput.value : 15, 10);
+          if (!work || work < 1 || work > 999 || !rounds || rounds < 1 || rounds > 99 || rest < 0 || rest > 999) {
+            window.alert("Ugyldige verdier. Tid og hvile 1–999 sek, runder 1–99.");
+            return;
+          }
+          timerState.workSec = work;
+          timerState.rounds = rounds;
+          timerState.restSec = rest;
+          timerState.currentRound = 1;
+          setTimerInputsEnabled(false);
+          startCountdownBlink();
+        });
+        resetBtn.addEventListener("click", () => { stopTimer(); });
+        if (workInput) workInput.addEventListener("change", () => { if (timerState.phase === "idle") timerState.workSec = parseInt(workInput.value, 10) || 45; });
+        if (roundsInput) roundsInput.addEventListener("change", () => { if (timerState.phase === "idle") timerState.rounds = parseInt(roundsInput.value, 10) || 3; });
+        if (restInput) restInput.addEventListener("change", () => { if (timerState.phase === "idle") timerState.restSec = parseInt(restInput.value, 10) || 15; });
       }
 
       function initHomeInteractions() {
@@ -6704,19 +8140,22 @@
           });
         }
 
-        const nullstillTreningsplanBtn = document.getElementById("nullstillTreningsplanBtn");
-        if (nullstillTreningsplanBtn) {
-          nullstillTreningsplanBtn.addEventListener("click", () => {
-            if (!window.confirm("Er du sikker på at du vil nullstille treningsplanen? Alle flyttede økter fjernes.")) return;
-            Object.keys(state.dayStatus || {}).forEach(function(dateKey) {
-              if (state.dayStatus[dateKey] && state.dayStatus[dateKey].status === "skippet") {
-                delete state.dayStatus[dateKey];
-              }
+        const alcoholLogSelect = document.getElementById("alcoholLogSelect");
+        const alcoholLogAddBtn = document.getElementById("alcoholLogAddBtn");
+        if (alcoholLogAddBtn && alcoholLogSelect) {
+          alcoholLogAddBtn.addEventListener("click", () => {
+            const type = alcoholLogSelect.value;
+            const opt = ALCOHOL_OPTIONS.find(o => o.value === type);
+            const units = opt ? opt.units : 1;
+            state.alcoholLog = state.alcoholLog || [];
+            state.alcoholLog.push({
+              id: Date.now(),
+              dateISO: toISODate(new Date()),
+              type: type,
+              units: units
             });
             saveState();
-            renderHome();
-            renderWeek();
-            renderLog();
+            renderSettings();
           });
         }
       }
@@ -6907,6 +8346,10 @@
         initCondLogModal();
         initLogExerciseSelect();
         initWeekDayActionModal();
+        initContinueOrNewWorkoutModal();
+        initLogDayDetailModal();
+        initJoggeturModal();
+        initTimerInteractions();
         renderHeader();
         renderHome();
         renderWeek();
@@ -6936,5 +8379,6 @@
       });
     }
   </script>
+  <div id="timerCountdownBlink" class="timer-countdown-blink" style="display:none;"></div>
 </body>
 </html>
