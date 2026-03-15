@@ -955,6 +955,16 @@
       border-radius: 50%;
       background: #00D4D8;
     }
+    .log-cal-day--morgenokt::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FF6B9D;
+    }
     .log-list-item-highlight {
       animation: logHighlight 2s ease-out;
     }
@@ -1957,23 +1967,90 @@
       margin-bottom: 16px;
     }
 
-    .morgenokt-block {
-      margin: 0 0 14px 0;
-      padding: 12px 14px;
-      border-radius: 12px;
+    .oekt-override-wrap { margin: 0 0 12px 0; }
+    .oekt-override-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+    body.theme-light .oekt-override-label { color: #1a1a1a; }
+    body.theme-dark .oekt-override-label { color: #fff; }
+    .oekt-override-select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
       border: 1px solid var(--border-light);
-      border-left: 4px solid #00D4D8;
-      background: rgba(255,255,255,0.95);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      box-sizing: border-box;
     }
-    body.theme-dark .morgenokt-block {
-      border-color: var(--border-dark);
-      border-left-color: #00D4D8;
-      background: rgba(20,20,35,0.95);
-    }
-    .morgenokt-block .morgenokt-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .morgenokt-block select { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-light); background: var(--bg-light); font-size: 14px; margin-bottom: 8px; box-sizing: border-box; }
-    body.theme-dark .morgenokt-block select { border-color: var(--border-dark); background: var(--bg-dark); }
+    body.theme-dark .oekt-override-select { border-color: var(--border-dark); }
+
+    .morgenokt-block { margin: 0 0 14px 0; }
     .morgenokt-block .morgenokt-done { font-size: 14px; font-weight: 600; color: var(--primary); }
+    .btn-morgenokt {
+      width: 100%;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0a3d40;
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), #00D4D8);
+      cursor: pointer;
+    }
+    body.theme-dark .btn-morgenokt {
+      color: #fff;
+      background: linear-gradient(90deg, rgba(255,255,255,0.2), #00D4D8);
+    }
+    .morgenokt-type-options { display: flex; flex-direction: column; gap: 8px; }
+    .morgenokt-type-options button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+    body.theme-dark .morgenokt-type-options button { border-color: var(--border-dark); }
+    .morgenokt-type-options button.morgenokt-type-selected { border-color: #00D4D8; background: rgba(0,212,216,0.15); }
+    .morgenokt-log-body { display: flex; flex-direction: column; gap: 10px; }
+    .morgenokt-log-field { display: flex; flex-direction: column; gap: 4px; }
+    .morgenokt-log-label { font-size: 12px; font-weight: 600; color: var(--text); }
+    body.theme-light .morgenokt-log-label { color: #1a1a1a; }
+    body.theme-dark .morgenokt-log-label { color: #fff; }
+    .morgenokt-log-input {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+    }
+    body.theme-dark .morgenokt-log-input { border-color: var(--border-dark); }
+    .morgenokt-mood-row { display: flex; gap: 8px; }
+    .morgenokt-mood-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 2px solid var(--border-light);
+      background: var(--surface);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+    body.theme-dark .morgenokt-mood-btn { border-color: var(--border-dark); }
+    .morgenokt-mood-btn.morgenokt-mood-active { border-color: #00D4D8; background: rgba(0,212,216,0.15); }
+    .morgenokt-log-textarea {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      resize: vertical;
+      font-family: inherit;
+    }
+    body.theme-dark .morgenokt-log-textarea { border-color: var(--border-dark); }
 
     .joggetur-block {
       margin: 0 0 14px 0;
@@ -2332,9 +2409,9 @@
             </div>
           </div>
           <div id="todayAnbefaling" class="today-anbefaling" style="display:none;"></div>
-          <div id="homeMorgenoktBlock" class="morgenokt-block"></div>
-          <div id="homeJoggeturBlock" class="joggetur-block">
-            <button type="button" id="joggeturLogBtn" class="btn joggetur-log-btn">Logg joggetur</button>
+          <div class="oekt-override-wrap">
+            <label class="oekt-override-label">Øktvalg</label>
+            <select id="homeOektOverrideSelect" class="oekt-override-select"></select>
           </div>
           <div id="homeLengthGrid" class="length-grid">
             <div class="length-card" data-length="20" data-label="Kort">
@@ -2417,6 +2494,8 @@
           </div>
 
           <div id="homeDaySpecific" class="length-grid" style="display:none;"></div>
+
+          <div id="homeMorgenoktBlock" class="morgenokt-block"></div>
 
           <div style="margin-top:10px; display:flex; justify-content: space-between; align-items:center; gap:8px;">
             <div style="font-size:11px; opacity:0.75;">
@@ -2850,6 +2929,47 @@
       <div class="modal-actions">
         <button type="button" class="btn btn-outline" id="joggeturModalCancel">Avbryt</button>
         <button type="button" class="btn btn-primary" id="joggeturModalSave">Lagre</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="morgenoktTypeModal">
+    <div class="modal-dialog">
+      <div class="modal-title">Velg type morgenøkt</div>
+      <div class="modal-body">
+        <div class="morgenokt-type-options" id="morgenoktTypeOptions"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="morgenoktTypeCancel">Avbryt</button>
+        <button type="button" class="btn btn-primary" id="morgenoktTypeNext">Neste</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="morgenoktLogModal">
+    <div class="modal-dialog">
+      <div class="modal-title" id="morgenoktLogTitle">Morgenøkt</div>
+      <div class="modal-body morgenokt-log-body">
+        <div class="morgenokt-log-field">
+          <label class="morgenokt-log-label">Varighet (min)</label>
+          <input type="number" id="morgenoktVarighet" class="morgenokt-log-input" min="1" max="120" value="20" />
+        </div>
+        <div class="morgenokt-log-field">
+          <label class="morgenokt-log-label">Dagsform</label>
+          <div class="morgenokt-mood-row">
+            <button type="button" class="morgenokt-mood-btn" data-mood="😴">😴</button>
+            <button type="button" class="morgenokt-mood-btn" data-mood="😐">😐</button>
+            <button type="button" class="morgenokt-mood-btn morgenokt-mood-active" data-mood="💪">💪</button>
+            <button type="button" class="morgenokt-mood-btn" data-mood="🔥">🔥</button>
+          </div>
+        </div>
+        <div class="morgenokt-log-field">
+          <label class="morgenokt-log-label">Notat</label>
+          <textarea id="morgenoktNotat" class="morgenokt-log-textarea" rows="2" placeholder="Valgfritt notat"></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="morgenoktLogSave">Lagre</button>
       </div>
     </div>
   </div>
@@ -4999,11 +5119,13 @@
         weights: [],            // [{dateISO, kg}]
         alcoholLog: [],         // [{dateISO, type, units} or {id, dateISO, type, units}]
         joggeturLog: [],        // [{id, dateISO, distanse, minutter, sekunder, snittpuls, makspuls, mood, intervall, motbakke, notat}]
+        morgenoktLog: [],       // [{id, dateISO, type, varighet, mood, notat}]
         logs: [],               // [{id, dateISO, title, length, pkg, label, mood, notes}]
         dayStatus: {},          // dateISO -> {status, label, length, pkg}
         exerciseSetLogs: [],    // [{dato, ovelse, sett: [{settNr, vekt, reps}]}]
         exerciseCondLogs: [],   // [{dato, ovelse, varighetMin, puls, intensitet}] for kondisjon/mobilitet
         extraWorkoutsByDay: {}, // dateISO -> [{ fromDate, label, length, pkg }]
+        oektOverride: {},       // dateISO -> oektType (e.g. "styrke-mandag-express-B", "kondisjon-spinning")
         innkjoringStartDate: null, // ISO date, null = ikke satt
       };
 
@@ -5189,23 +5311,7 @@
         return STANDARD_UKEPLAN[ukedag];
       }
 
-      var MORGENOKT_OPTIONS = ["Roing", "Spinning", "Tibetanske riter", "Yoga", "Mageøvelser"];
-      function getMorgenoktKey(dateISO) {
-        return "morgenokt_" + (dateISO || toISODate(new Date()));
-      }
-      function getMorgenoktForDato(dateISO) {
-        try {
-          return localStorage.getItem(getMorgenoktKey(dateISO));
-        } catch (e) {
-          return null;
-        }
-      }
-      function setMorgenoktForDato(dateISO, value) {
-        try {
-          if (value) localStorage.setItem(getMorgenoktKey(dateISO), value);
-          else localStorage.removeItem(getMorgenoktKey(dateISO));
-        } catch (e) {}
-      }
+      var MORGENOKT_TYPE_OPTIONS = ["Roing", "Spinning", "Tibetanske riter", "Yoga", "Mageøvelser"];
 
       function getCurrentDay() {
         const okt = getOktForDato(new Date());
@@ -5216,6 +5322,119 @@
         const okt = getOktForDato(date);
         if (!okt || !okt.dag || !WORKOUT_PROGRAM.days || !WORKOUT_PROGRAM.days[okt.dag]) return null;
         return { key: okt.dag, config: WORKOUT_PROGRAM.days[okt.dag] };
+      }
+
+      var OEFT_OVERRIDE_OPTIONS = [];
+      (function() {
+        var styrkeDager = [
+          { key: "mandag", tittel: "Styrke Overkropp" },
+          { key: "onsdag", tittel: "Styrke Underkropp" },
+          { key: "fredag", tittel: "Core og Helkropp" }
+        ];
+        var lengder = [{ key: "kort", label: "Kort" }, { key: "express", label: "Express" }, { key: "full", label: "Full" }];
+        var pakker = ["A", "B", "C"];
+        styrkeDager.forEach(function(d) {
+          lengder.forEach(function(l) {
+            pakker.forEach(function(p) {
+              OEFT_OVERRIDE_OPTIONS.push({ group: "Styrke", label: d.tittel + " – " + l.label + " " + p, value: "styrke-" + d.key + "-" + l.key + "-" + p });
+            });
+          });
+        });
+        [
+          { value: "kondisjon-morgenroing-fysio", label: "Morgenroing + Fysioterapi" },
+          { value: "kondisjon-spinning", label: "Spinning (50 min)" },
+          { value: "kondisjon-airbike", label: "Airbike HIIT (20 min)" },
+          { value: "kondisjon-romaskin", label: "Romaskin (30 min)" },
+          { value: "joggetur", label: "Joggetur" },
+          { value: "kondisjon-motbakkegang", label: "Motbakkegang" }
+        ].forEach(function(o) { OEFT_OVERRIDE_OPTIONS.push({ group: "Kondisjon", label: o.label, value: o.value }); });
+        [
+          { value: "annet-tibetanske", label: "Tibetanske riter + mobilitet" },
+          { value: "annet-mage", label: "Mageøvelser" },
+          { value: "annet-fysio-kne", label: "Fysioterapi kne" },
+          { value: "annet-fysio-arm", label: "Fysioterapi arm" }
+        ].forEach(function(o) { OEFT_OVERRIDE_OPTIONS.push({ group: "Annet", label: o.label, value: o.value }); });
+      })();
+
+      var OEFT_DEFAULT_BY_WEEKDAY = { 0: "kondisjon-motbakkegang", 1: "styrke-mandag-express-B", 2: "kondisjon-morgenroing-fysio", 3: "styrke-onsdag-express-B", 4: "annet-tibetanske", 5: "styrke-fredag-express-B", 6: "kondisjon-spinning" };
+
+      function getDefaultOektTypeForDate(iso) {
+        var d = new Date(String(iso).slice(0, 10) + "T12:00:00");
+        return OEFT_DEFAULT_BY_WEEKDAY[d.getDay()] || "styrke-mandag-express-B";
+      }
+
+      function getEffectiveOktTypeForDate(iso) {
+        var over = state.oektOverride && state.oektOverride[iso];
+        return over || getDefaultOektTypeForDate(iso);
+      }
+
+      function getDayKeyFromOektType(oektType) {
+        if (!oektType) return null;
+        if (oektType === "joggetur") return "joggetur";
+        if (oektType.indexOf("styrke-mandag-") === 0) return "mandag";
+        if (oektType.indexOf("styrke-onsdag-") === 0) return "onsdag";
+        if (oektType.indexOf("styrke-fredag-") === 0) return "fredag";
+        if (oektType === "kondisjon-morgenroing-fysio" || oektType === "annet-fysio-kne" || oektType === "annet-fysio-arm") return "tirsdag";
+        if (oektType === "kondisjon-spinning" || oektType === "kondisjon-airbike" || oektType === "kondisjon-romaskin") return "lordag";
+        if (oektType === "kondisjon-motbakkegang") return "sondag";
+        if (oektType === "annet-tibetanske") return "torsdag";
+        if (oektType === "annet-mage") return "fredag";
+        return null;
+      }
+
+      function applyOektTypeToWorkout(oektType, dateISO) {
+        if (oektType === "joggetur") {
+          openJoggeturLogModal(dateISO);
+          return;
+        }
+        var overrideDayKey = null;
+        var lengthLabel = null;
+        var pkgKey = "B";
+        if (oektType.indexOf("styrke-") === 0) {
+          var parts = oektType.split("-");
+          if (parts.length >= 4) {
+            overrideDayKey = parts[1];
+            lengthLabel = parts[2] === "kort" ? "Kort" : parts[2] === "express" ? "Express" : "Full";
+            pkgKey = parts[3];
+          }
+        } else if (oektType === "kondisjon-morgenroing-fysio") {
+          overrideDayKey = "tirsdag";
+          lengthLabel = null;
+          pkgKey = null;
+        } else if (oektType === "kondisjon-spinning") {
+          overrideDayKey = "lordag";
+          lengthLabel = null;
+          pkgKey = "A";
+        } else if (oektType === "kondisjon-airbike") {
+          overrideDayKey = "lordag";
+          lengthLabel = null;
+          pkgKey = "B";
+        } else if (oektType === "kondisjon-romaskin") {
+          overrideDayKey = "lordag";
+          lengthLabel = null;
+          pkgKey = "C";
+        } else if (oektType === "kondisjon-motbakkegang") {
+          overrideDayKey = "sondag";
+          lengthLabel = "progresjon";
+          pkgKey = null;
+        } else if (oektType === "annet-tibetanske") {
+          overrideDayKey = "torsdag";
+          lengthLabel = "tibetanske";
+          pkgKey = null;
+        } else if (oektType === "annet-mage") {
+          overrideDayKey = "fredag";
+          lengthLabel = "Kort";
+          pkgKey = "B";
+        } else if (oektType === "annet-fysio-kne") {
+          overrideDayKey = "tirsdag";
+          lengthLabel = "fysioKne";
+          pkgKey = null;
+        } else if (oektType === "annet-fysio-arm") {
+          overrideDayKey = "tirsdag";
+          lengthLabel = "fysioArm";
+          pkgKey = null;
+        }
+        showWorkoutScreen(lengthLabel, pkgKey, dateISO, overrideDayKey);
       }
 
       const PAKKE_HISTORIKK_KEY = "pakkeHistorikk";
@@ -5685,12 +5904,12 @@
         listEl.style.display = "flex";
       }
 
-      function showWorkoutScreen(lengthLabel, pkgKey, optionalDateISO) {
+      function showWorkoutScreen(lengthLabel, pkgKey, optionalDateISO, optionalOverrideDayKey) {
         var dateForWorkout = optionalDateISO ? new Date(optionalDateISO + "T12:00:00") : new Date();
         var dayIndex = dateForWorkout.getDay();
         if (dayIndex < 0 || dayIndex > 6) dayIndex = new Date().getDay();
         var programDay = getProgramDayForDate(dateForWorkout);
-        var dagNokkel = programDay ? programDay.key : WEEKDAY_PROGRAM_KEYS[dayIndex];
+        var dagNokkel = optionalOverrideDayKey || (programDay ? programDay.key : WEEKDAY_PROGRAM_KEYS[dayIndex]);
         var nivaNokkel = normalizeLengthLabel((lengthLabel || "").toString());
         if (!nivaNokkel && typeof lengthLabel === "string") {
           var lower = lengthLabel.toLowerCase();
@@ -5716,6 +5935,10 @@
           var lengthLower = (lengthLabel || "").toString().toLowerCase().trim();
           if (lengthLower === "morgenroing" && dayConfig.blocks.morgenroing) {
             data = { exercises: dayConfig.blocks.morgenroing.exercises, levelNavn: dayConfig.blocks.morgenroing.navn || "Morgenroing", minutter: 20, dayType: "tirsdag-morgenroing" };
+          } else if (lengthLower === "fysiokne" && dayConfig.blocks.fysioKne) {
+            data = { exercises: dayConfig.blocks.fysioKne.exercises || [], levelNavn: dayConfig.blocks.fysioKne.navn || "Fysioterapi kne", minutter: 20, dayType: "tirsdag" };
+          } else if (lengthLower === "fysioarm" && dayConfig.blocks.fysioArm) {
+            data = { exercises: dayConfig.blocks.fysioArm.exercises || [], levelNavn: dayConfig.blocks.fysioArm.navn || "Fysioterapi arm", minutter: 20, dayType: "tirsdag" };
           } else if (lengthLower === "fysioterapi") {
             var exs = [];
             if (dayConfig.blocks.fysioKne && Array.isArray(dayConfig.blocks.fysioKne.exercises)) exs = exs.concat(dayConfig.blocks.fysioKne.exercises);
@@ -6428,7 +6651,8 @@
               setLogState = { exerciseName: "", totalSets: 1, currentSet: 1, loggedSets: [], dateISO: "" };
               saveState();
               openedWorkoutFromView = "week";
-              showWorkoutScreen(continueOrNewPending.label, continueOrNewPending.pkg, continueOrNewPending.iso);
+              var eff = continueOrNewPending.effectiveType || getEffectiveOktTypeForDate(continueOrNewPending.iso);
+              applyOektTypeToWorkout(eff, continueOrNewPending.iso);
               continueOrNewPending = null;
             }
             modal.style.display = "none";
@@ -6494,10 +6718,14 @@
         }
         if (homeWelcomeQuote) homeWelcomeQuote.textContent = "\u00AB" + getQuoteForToday() + "\u00BB";
 
-        var dagNokkelForTitle = getCurrentDay();
+        var todayISO = toISODate(new Date());
+        var effectiveOektType = getEffectiveOktTypeForDate(todayISO);
+        var dagNokkelForTitle = getDayKeyFromOektType(effectiveOektType) || getCurrentDay();
         var dayProgram = WORKOUT_PROGRAM.days[dagNokkelForTitle];
         if (todayWorkoutTitle) {
-          if (dayProgram && dayProgram.tittel) {
+          if (dagNokkelForTitle === "joggetur") {
+            todayWorkoutTitle.textContent = "Joggetur";
+          } else if (dayProgram && dayProgram.tittel) {
             todayWorkoutTitle.textContent = dayProgram.tittel;
           } else if (today.length <= 20) {
             todayWorkoutTitle.textContent = "Rask økt – bare få det gjort";
@@ -6508,7 +6736,9 @@
           }
         }
         if (todayMeta) {
-          if (dagNokkelForTitle === "lordag" || dagNokkelForTitle === "tirsdag" || dagNokkelForTitle === "torsdag" || dagNokkelForTitle === "sondag") {
+          if (dagNokkelForTitle === "joggetur") {
+            todayMeta.textContent = "Logg joggetur nedenfor";
+          } else if (dagNokkelForTitle === "lordag" || dagNokkelForTitle === "tirsdag" || dagNokkelForTitle === "torsdag" || dagNokkelForTitle === "sondag") {
             todayMeta.textContent = "Velg økt nedenfor";
           } else {
             const level =
@@ -6519,19 +6749,73 @@
           }
         }
 
+        var displayLength = today.length;
+        var displayPkg = today.pkg || "B";
+        if (effectiveOektType && effectiveOektType.indexOf("styrke-") === 0) {
+          var parts = effectiveOektType.split("-");
+          if (parts.length >= 4) {
+            displayLength = parts[2] === "kort" ? 20 : parts[2] === "express" ? 35 : 60;
+            displayPkg = parts[3] || "B";
+          }
+        } else if (effectiveOektType === "kondisjon-spinning") { displayLength = 50; displayPkg = "A"; }
+        else if (effectiveOektType === "kondisjon-airbike") { displayLength = 20; displayPkg = "B"; }
+        else if (effectiveOektType === "kondisjon-romaskin") { displayLength = 30; displayPkg = "C"; }
+        else if (effectiveOektType === "kondisjon-morgenroing-fysio") { displayLength = 50; displayPkg = ""; }
+        else if (effectiveOektType === "annet-tibetanske") { displayLength = 20; displayPkg = ""; }
+        else if (effectiveOektType === "kondisjon-motbakkegang") { displayLength = 0; displayPkg = ""; }
+        else if (effectiveOektType === "joggetur") { displayLength = 0; displayPkg = ""; }
         if (todayPackageLabel) {
-          todayPackageLabel.textContent = `Pakke ${today.pkg || "B"}`;
+          todayPackageLabel.textContent = displayPkg ? "Pakke " + displayPkg : "";
         }
         if (todayMinutes) {
-          todayMinutes.innerHTML = `${today.length}<span>min</span>`;
+          todayMinutes.innerHTML = displayLength ? `${displayLength}<span>min</span>` : "<span>Varierer</span>";
         }
-        var dagForAnbefaling = getCurrentDay();
+        var dagForAnbefaling = getDayKeyFromOektType(effectiveOektType) || getCurrentDay();
         var anbefaling = getNestePakke(dagForAnbefaling);
         var todayAnbefalingEl = document.getElementById("todayAnbefaling");
         if (todayAnbefalingEl) {
           var lengdeNavn = anbefaling.anbefaltLengde.charAt(0).toUpperCase() + anbefaling.anbefaltLengde.slice(1);
           todayAnbefalingEl.textContent = "\uD83D\uDCA1 Anbefalt i dag: " + lengdeNavn + " \u2013 Pakke " + anbefaling.anbefaltPakke;
           todayAnbefalingEl.style.display = (dagForAnbefaling === "mandag" || dagForAnbefaling === "onsdag" || dagForAnbefaling === "fredag") ? "" : "none";
+        }
+
+        var homeOektSelect = document.getElementById("homeOektOverrideSelect");
+        if (homeOektSelect) {
+          if (!homeOektSelect.dataset.wired) {
+            homeOektSelect.dataset.wired = "1";
+            homeOektSelect.addEventListener("change", function() {
+              var todayIso = toISODate(new Date());
+              var val = homeOektSelect.value;
+              var def = getDefaultOektTypeForDate(todayIso);
+              if (val === def) {
+                delete state.oektOverride[todayIso];
+              } else {
+                state.oektOverride = state.oektOverride || {};
+                state.oektOverride[todayIso] = val;
+              }
+              saveState();
+              renderHome();
+            });
+          }
+          homeOektSelect.innerHTML = "";
+          var groups = {};
+          OEFT_OVERRIDE_OPTIONS.forEach(function(opt) {
+            if (!groups[opt.group]) groups[opt.group] = [];
+            groups[opt.group].push(opt);
+          });
+          ["Styrke", "Kondisjon", "Annet"].forEach(function(g) {
+            if (!groups[g]) return;
+            var optgroup = document.createElement("optgroup");
+            optgroup.label = g;
+            groups[g].forEach(function(opt) {
+              var o = document.createElement("option");
+              o.value = opt.value;
+              o.textContent = opt.label;
+              optgroup.appendChild(o);
+            });
+            homeOektSelect.appendChild(optgroup);
+          });
+          homeOektSelect.value = effectiveOektType;
         }
 
         const statusTextMap = {
@@ -6556,49 +6840,42 @@
           todayStatusPill.classList.add(`status-pill--${status === "fullført" ? "fullfort" : status}`);
         }
 
-        var dagNokkel = getCurrentDay();
+        var dagNokkel = dagNokkelForTitle;
         var lengthGridEl = document.getElementById("homeLengthGrid");
         var daySpecificEl = document.getElementById("homeDaySpecific");
         var morgenoktBlock = document.getElementById("homeMorgenoktBlock");
         if (!lengthGridEl || !daySpecificEl) return;
-
-        var todayISO = toISODate(new Date());
         if (morgenoktBlock) {
           morgenoktBlock.innerHTML = "";
-          var morgenVal = getMorgenoktForDato(todayISO);
-          if (morgenVal) {
+          var morgenToday = (state.morgenoktLog || []).filter(function(m) { return m.dateISO === todayISO; });
+          if (morgenToday.length > 0) {
             var doneEl = document.createElement("div");
             doneEl.className = "morgenokt-done";
             doneEl.textContent = "Morgenøkt fullført ✓";
             morgenoktBlock.appendChild(doneEl);
           } else {
-            var titleEl = document.createElement("div");
-            titleEl.className = "morgenokt-title";
-            titleEl.textContent = "Valgfri morgenøkt – 20 min";
-            morgenoktBlock.appendChild(titleEl);
-            var sel = document.createElement("select");
-            MORGENOKT_OPTIONS.forEach(function(opt) {
-              var o = document.createElement("option");
-              o.value = opt;
-              o.textContent = opt;
-              sel.appendChild(o);
-            });
-            var startBtn = document.createElement("button");
-            startBtn.type = "button";
-            startBtn.className = "btn btn-primary";
-            startBtn.textContent = "Start morgenøkt";
-            startBtn.addEventListener("click", function() {
-              var v = sel.value;
-              if (v) {
-                setMorgenoktForDato(todayISO, v);
-                renderHome();
-              }
-            });
-            morgenoktBlock.appendChild(sel);
-            morgenoktBlock.appendChild(startBtn);
+            var regBtn = document.createElement("button");
+            regBtn.type = "button";
+            regBtn.className = "btn btn-morgenokt";
+            regBtn.textContent = "Registrer morgenøkt";
+            regBtn.addEventListener("click", function() { openMorgenoktTypeModal(todayISO); });
+            morgenoktBlock.appendChild(regBtn);
           }
         }
 
+        if (dagNokkel === "joggetur") {
+          lengthGridEl.style.display = "none";
+          daySpecificEl.style.display = "flex";
+          daySpecificEl.innerHTML = "";
+          var joggeturBtn = document.createElement("button");
+          joggeturBtn.type = "button";
+          joggeturBtn.className = "btn joggetur-log-btn";
+          joggeturBtn.style.width = "100%";
+          joggeturBtn.textContent = "Logg joggetur";
+          joggeturBtn.addEventListener("click", function() { openJoggeturLogModal(); });
+          daySpecificEl.appendChild(joggeturBtn);
+          return;
+        }
         if (dagNokkel === "mandag" || dagNokkel === "onsdag" || dagNokkel === "fredag") {
           lengthGridEl.style.display = "";
           daySpecificEl.style.display = "none";
@@ -6631,7 +6908,7 @@
               btnA.className = "length-main-btn";
               btnA.style.width = "100%";
               btnA.textContent = "Spinning (50 min)";
-              btnA.addEventListener("click", function() { showWorkoutScreen(null, "A"); });
+              btnA.addEventListener("click", function() { applyOektTypeToWorkout("kondisjon-spinning", todayISO); });
               daySpecificEl.appendChild(btnA);
             }
             if (pkB) {
@@ -6639,7 +6916,7 @@
               btnB.className = "length-main-btn";
               btnB.style.width = "100%";
               btnB.textContent = "Airbike HIIT (20 min)";
-              btnB.addEventListener("click", function() { showWorkoutScreen(null, "B"); });
+              btnB.addEventListener("click", function() { applyOektTypeToWorkout("kondisjon-airbike", todayISO); });
               daySpecificEl.appendChild(btnB);
             }
             if (pkC) {
@@ -6647,7 +6924,7 @@
               btnC.className = "length-main-btn";
               btnC.style.width = "100%";
               btnC.textContent = "Romaskin steady state (30 min)";
-              btnC.addEventListener("click", function() { showWorkoutScreen(null, "C"); });
+              btnC.addEventListener("click", function() { applyOektTypeToWorkout("kondisjon-romaskin", todayISO); });
               daySpecificEl.appendChild(btnC);
             }
           }
@@ -6658,13 +6935,13 @@
             btn1.className = "length-main-btn";
             btn1.style.width = "100%";
             btn1.textContent = "Morgenroing (20 min)";
-            btn1.addEventListener("click", function() { showWorkoutScreen("morgenroing", null); });
+            btn1.addEventListener("click", function() { applyOektTypeToWorkout("kondisjon-morgenroing-fysio", todayISO); });
             daySpecificEl.appendChild(btn1);
             var btn2 = document.createElement("button");
             btn2.className = "length-main-btn";
             btn2.style.width = "100%";
             btn2.textContent = "Fysioterapi (kne + arm)";
-            btn2.addEventListener("click", function() { showWorkoutScreen("fysioterapi", null); });
+            btn2.addEventListener("click", function() { showWorkoutScreen("fysioterapi", null, todayISO, "tirsdag"); });
             daySpecificEl.appendChild(btn2);
           }
         } else if (dagNokkel === "torsdag") {
@@ -6674,7 +6951,7 @@
             btnT.className = "length-main-btn";
             btnT.style.width = "100%";
             btnT.textContent = "Tibetanske riter (20 min)";
-            btnT.addEventListener("click", function() { showWorkoutScreen("tibetanske", null); });
+            btnT.addEventListener("click", function() { applyOektTypeToWorkout("annet-tibetanske", todayISO); });
             daySpecificEl.appendChild(btnT);
           }
         } else if (dagNokkel === "sondag") {
@@ -6684,7 +6961,7 @@
             btnS.className = "length-main-btn";
             btnS.style.width = "100%";
             btnS.textContent = "Motbakkegang – ukesbasert progresjon";
-            btnS.addEventListener("click", function() { showWorkoutScreen("progresjon", null); });
+            btnS.addEventListener("click", function() { applyOektTypeToWorkout("kondisjon-motbakkegang", todayISO); });
             daySpecificEl.appendChild(btnS);
           }
         }
@@ -6768,11 +7045,11 @@
           statusRow.appendChild(statusWrapper);
           card.appendChild(statusRow);
 
-          var morgenVal = getMorgenoktForDato(iso);
-          if (morgenVal) {
+          var morgenEntries = (state.morgenoktLog || []).filter(function(m) { return m.dateISO === iso; });
+          if (morgenEntries.length > 0) {
             var morgenLine = document.createElement("div");
             morgenLine.className = "week-morgenokt-line";
-            morgenLine.textContent = "Morgenøkt: " + morgenVal + " ✓";
+            morgenLine.textContent = "Morgenøkt: " + (morgenEntries[0].type || "—") + " ✓";
             card.appendChild(morgenLine);
           }
 
@@ -6840,21 +7117,61 @@
 
         container.innerHTML = "";
 
+        var effectiveType = getEffectiveOktTypeForDate(iso);
+        var dropWrap = document.createElement("div");
+        dropWrap.className = "oekt-override-wrap";
+        var dropLabel = document.createElement("label");
+        dropLabel.className = "oekt-override-label";
+        dropLabel.textContent = "Øktvalg";
+        var dropSelect = document.createElement("select");
+        dropSelect.className = "oekt-override-select";
+        var groups = {};
+        OEFT_OVERRIDE_OPTIONS.forEach(function(opt) {
+          if (!groups[opt.group]) groups[opt.group] = [];
+          groups[opt.group].push(opt);
+        });
+        ["Styrke", "Kondisjon", "Annet"].forEach(function(g) {
+          if (!groups[g]) return;
+          var optgroup = document.createElement("optgroup");
+          optgroup.label = g;
+          groups[g].forEach(function(opt) {
+            var o = document.createElement("option");
+            o.value = opt.value;
+            o.textContent = opt.label;
+            optgroup.appendChild(o);
+          });
+          dropSelect.appendChild(optgroup);
+        });
+        dropSelect.value = effectiveType;
+        dropSelect.addEventListener("change", function() {
+          var val = dropSelect.value;
+          var def = getDefaultOektTypeForDate(iso);
+          state.oektOverride = state.oektOverride || {};
+          if (val === def) delete state.oektOverride[iso];
+          else state.oektOverride[iso] = val;
+          saveState();
+          openWeekDayActionModal(iso);
+        });
+        dropWrap.appendChild(dropLabel);
+        dropWrap.appendChild(dropSelect);
+        container.appendChild(dropWrap);
+
         const registerBtn = document.createElement("button");
         registerBtn.type = "button";
         registerBtn.className = "btn btn-primary";
         registerBtn.textContent = "Registrer økt";
         registerBtn.addEventListener("click", () => {
-          const dayInfo = state.dayStatus[iso] || { label: "Express", length: 35, pkg: "B" };
+          var effective = getEffectiveOktTypeForDate(iso);
           var hasLoggedSets = (state.exerciseSetLogs || []).some(function(e) { return e.dato === iso; });
           if (hasLoggedSets) {
-            continueOrNewPending = { label: dayInfo.label, pkg: dayInfo.pkg, iso: iso };
+            var dayInfo = state.dayStatus[iso] || { label: "Express", length: 35, pkg: "B" };
+            continueOrNewPending = { label: dayInfo.label, pkg: dayInfo.pkg, iso: iso, effectiveType: effective };
             modal.style.display = "none";
             var continueModal = document.getElementById("continueOrNewWorkoutModal");
             if (continueModal) continueModal.style.display = "flex";
           } else {
             openedWorkoutFromView = "week";
-            showWorkoutScreen(dayInfo.label, dayInfo.pkg, iso);
+            applyOektTypeToWorkout(effective, iso);
             modal.style.display = "none";
           }
         });
@@ -6876,40 +7193,24 @@
         });
         container.appendChild(noWorkoutBtn);
 
-        var morgenValWeek = getMorgenoktForDato(iso);
+        var morgenEntriesWeek = (state.morgenoktLog || []).filter(function(m) { return m.dateISO === iso; });
         var morgenWrap = document.createElement("div");
         morgenWrap.className = "morgenokt-block";
         morgenWrap.style.marginTop = "12px";
-        if (morgenValWeek) {
+        if (morgenEntriesWeek.length > 0) {
           var morgenDoneTxt = document.createElement("div");
           morgenDoneTxt.className = "morgenokt-done";
-          morgenDoneTxt.textContent = "Morgenøkt: " + morgenValWeek + " ✓";
+          morgenDoneTxt.textContent = "Morgenøkt: " + (morgenEntriesWeek[0].type || "—") + " ✓";
           morgenWrap.appendChild(morgenDoneTxt);
         } else {
-          var morgenLabel = document.createElement("div");
-          morgenLabel.className = "morgenokt-title";
-          morgenLabel.textContent = "Valgfri morgenøkt – 20 min";
-          morgenWrap.appendChild(morgenLabel);
-          var morgenSel = document.createElement("select");
-          MORGENOKT_OPTIONS.forEach(function(opt) {
-            var o = document.createElement("option");
-            o.value = opt;
-            o.textContent = opt;
-            morgenSel.appendChild(o);
-          });
           var morgenRegBtn = document.createElement("button");
           morgenRegBtn.type = "button";
-          morgenRegBtn.className = "btn btn-outline";
+          morgenRegBtn.className = "btn btn-morgenokt";
           morgenRegBtn.textContent = "Registrer morgenøkt";
           morgenRegBtn.addEventListener("click", function() {
-            var v = morgenSel.value;
-            if (v) {
-              setMorgenoktForDato(iso, v);
-              renderWeek();
-              openWeekDayActionModal(iso);
-            }
+            openMorgenoktTypeModal(iso);
+            modal.style.display = "none";
           });
-          morgenWrap.appendChild(morgenSel);
           morgenWrap.appendChild(morgenRegBtn);
         }
         container.appendChild(morgenWrap);
@@ -6922,6 +7223,7 @@
           resetBtn.addEventListener("click", () => {
             delete state.dayStatus[iso];
             state.logs = (state.logs || []).filter(l => l.dateISO !== iso);
+            state.morgenoktLog = (state.morgenoktLog || []).filter(m => m.dateISO !== iso);
             clearFremgangForDate(iso);
             saveState();
             lastResetDayISO = iso;
@@ -7035,11 +7337,14 @@
 
         if (!logList || !logSummaryLabel || !graphRows || !graphContainer) return;
 
-        const normalLogs = [...(state.logs || [])].map(function(l) { return { ...l, joggetur: false }; });
+        const normalLogs = [...(state.logs || [])].map(function(l) { return { ...l, joggetur: false, morgenokt: false }; });
         const joggeturItems = (state.joggeturLog || []).map(function(j) {
-          return { id: j.id, dateISO: j.dateISO, joggetur: true, title: "Joggetur", mood: j.mood || "💪", distanse: j.distanse, minutter: j.minutter, sekunder: j.sekunder, notes: j.notat || "" };
+          return { id: j.id, dateISO: j.dateISO, joggetur: true, morgenokt: false, title: "Joggetur", mood: j.mood || "💪", distanse: j.distanse, minutter: j.minutter, sekunder: j.sekunder, notes: j.notat || "" };
         });
-        const combined = normalLogs.concat(joggeturItems).sort(function(a, b) {
+        const morgenoktItems = (state.morgenoktLog || []).map(function(m) {
+          return { id: m.id, dateISO: m.dateISO, joggetur: false, morgenokt: true, title: "Morgenøkt – " + (m.type || "—"), mood: m.mood || "💪", varighet: m.varighet, notes: m.notat || "" };
+        });
+        const combined = normalLogs.concat(joggeturItems).concat(morgenoktItems).sort(function(a, b) {
           if (a.dateISO === b.dateISO) return (b.id || 0) - (a.id || 0);
           return a.dateISO > b.dateISO ? -1 : 1;
         });
@@ -7063,7 +7368,9 @@
         }
 
         const totalMinutes = combined.reduce(function(sum, e) {
-          return sum + (e.joggetur ? (e.minutter || 0) + (e.sekunder || 0) / 60 : (e.length || 0));
+          if (e.joggetur) return sum + (e.minutter || 0) + (e.sekunder || 0) / 60;
+          if (e.morgenokt) return sum + (e.varighet || 0);
+          return sum + (e.length || 0);
         }, 0);
         logSummaryLabel.textContent = combined.length + " økter • " + Math.round(totalMinutes) + " min totalt";
 
@@ -7081,7 +7388,7 @@
           titleRow.className = "log-title-row";
 
           const title = document.createElement("div");
-          title.textContent = entry.joggetur ? "Joggetur" : (entry.title || "Økt");
+          title.textContent = entry.joggetur ? "Joggetur" : entry.morgenokt ? (entry.title || "Morgenøkt") : (entry.title || "Økt");
 
           const date = new Date(entry.dateISO + "T12:00:00");
           const dateSpan = document.createElement("div");
@@ -7093,6 +7400,8 @@
           if (entry.joggetur) {
             var tidStr = (entry.minutter || 0) + ":" + (String(entry.sekunder || 0).padStart(2, "0"));
             meta.textContent = (entry.distanse != null ? entry.distanse + " km" : "—") + " • " + tidStr;
+          } else if (entry.morgenokt) {
+            meta.textContent = (entry.varighet || 20) + " min";
           } else if (entry.skipped) {
             meta.textContent = entry.skipReason || "Ingen trening";
           } else {
@@ -7108,7 +7417,7 @@
             notes.textContent = entry.notes;
           } else {
             notes.textContent = entry.skipped ? "" : "Ingen notat.";
-            if (!entry.skipped && !entry.joggetur) notes.classList.add("log-notes-empty");
+            if (!entry.skipped && !entry.joggetur && !entry.morgenokt) notes.classList.add("log-notes-empty");
           }
 
           const actions = document.createElement("div");
@@ -7124,6 +7433,15 @@
               saveState();
               renderLog();
               renderLogCalendar();
+            });
+          } else if (entry.morgenokt) {
+            deleteBtn.addEventListener("click", function() {
+              state.morgenoktLog = (state.morgenoktLog || []).filter(function(m) { return m.id !== entry.id; });
+              saveState();
+              renderLog();
+              renderLogCalendar();
+              renderHome();
+              renderWeek();
             });
           } else {
             deleteBtn.addEventListener("click", function() { openDeleteModal(entry.id); });
@@ -7237,6 +7555,8 @@
           if (isToday) cell.classList.add("log-cal-day--today");
           const hasJoggetur = (state.joggeturLog || []).some(function(j) { return j.dateISO === dateISO; });
           if (hasJoggetur) cell.classList.add("log-cal-day--joggetur");
+          const hasMorgenokt = (state.morgenoktLog || []).some(function(m) { return m.dateISO === dateISO; });
+          if (hasMorgenokt) cell.classList.add("log-cal-day--morgenokt");
           if (hasLog) {
             cell.classList.add("log-cal-day--clickable");
             cell.dataset.dateISO = dateISO;
@@ -7273,6 +7593,96 @@
         if (modal) modal.style.display = "none";
       }
 
+      var morgenoktContextDateISO = null;
+      var morgenoktSelectedType = null;
+
+      function openMorgenoktTypeModal(optionalDateISO) {
+        morgenoktContextDateISO = optionalDateISO || toISODate(new Date());
+        morgenoktSelectedType = null;
+        var optionsEl = document.getElementById("morgenoktTypeOptions");
+        if (!optionsEl) return;
+        optionsEl.innerHTML = "";
+        MORGENOKT_TYPE_OPTIONS.forEach(function(opt) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = opt;
+          btn.dataset.type = opt;
+          btn.addEventListener("click", function() {
+            morgenoktSelectedType = opt;
+            optionsEl.querySelectorAll("button").forEach(function(b) { b.classList.remove("morgenokt-type-selected"); });
+            btn.classList.add("morgenokt-type-selected");
+          });
+          optionsEl.appendChild(btn);
+        });
+        document.getElementById("morgenoktTypeModal").style.display = "flex";
+      }
+
+      function closeMorgenoktTypeModal() {
+        document.getElementById("morgenoktTypeModal").style.display = "none";
+      }
+
+      function openMorgenoktLogModal(type) {
+        var titleEl = document.getElementById("morgenoktLogTitle");
+        if (titleEl) titleEl.textContent = (type || "Morgenøkt") + " – morgenøkt";
+        document.getElementById("morgenoktVarighet").value = "20";
+        document.getElementById("morgenoktNotat").value = "";
+        document.querySelectorAll(".morgenokt-mood-btn").forEach(function(btn) {
+          btn.classList.toggle("morgenokt-mood-active", btn.dataset.mood === "💪");
+        });
+        document.getElementById("morgenoktLogModal").style.display = "flex";
+      }
+
+      function closeMorgenoktLogModal() {
+        document.getElementById("morgenoktLogModal").style.display = "none";
+      }
+
+      function initMorgenoktModals() {
+        var typeModal = document.getElementById("morgenoktTypeModal");
+        var typeCancel = document.getElementById("morgenoktTypeCancel");
+        var typeNext = document.getElementById("morgenoktTypeNext");
+        var logModal = document.getElementById("morgenoktLogModal");
+        var logSave = document.getElementById("morgenoktLogSave");
+        if (typeCancel) typeCancel.addEventListener("click", closeMorgenoktTypeModal);
+        if (typeModal) typeModal.addEventListener("click", function(e) { if (e.target === typeModal) closeMorgenoktTypeModal(); });
+        if (typeNext) {
+          typeNext.addEventListener("click", function() {
+            if (!morgenoktSelectedType) return;
+            closeMorgenoktTypeModal();
+            openMorgenoktLogModal(morgenoktSelectedType);
+          });
+        }
+        if (logModal) logModal.addEventListener("click", function(e) { if (e.target === logModal) closeMorgenoktLogModal(); });
+        document.querySelectorAll(".morgenokt-mood-btn").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            document.querySelectorAll(".morgenokt-mood-btn").forEach(function(b) { b.classList.remove("morgenokt-mood-active"); });
+            btn.classList.add("morgenokt-mood-active");
+          });
+        });
+        if (logSave) {
+          logSave.addEventListener("click", function() {
+            var varighet = parseInt(document.getElementById("morgenoktVarighet").value, 10) || 20;
+            var moodBtn = document.querySelector(".morgenokt-mood-btn.morgenokt-mood-active");
+            var mood = moodBtn ? moodBtn.dataset.mood : "💪";
+            var notat = (document.getElementById("morgenoktNotat").value || "").trim();
+            state.morgenoktLog = state.morgenoktLog || [];
+            state.morgenoktLog.push({
+              id: Date.now() + Math.random(),
+              dateISO: morgenoktContextDateISO || toISODate(new Date()),
+              type: morgenoktSelectedType || "Morgenøkt",
+              varighet: varighet,
+              mood: mood,
+              notat: notat
+            });
+            saveState();
+            closeMorgenoktLogModal();
+            renderHome();
+            renderWeek();
+            renderLog();
+            renderLogCalendar();
+          });
+        }
+      }
+
       const JOGGETUR_WEIGHT_KG = 84;
       const JOGGETUR_MET = 8;
 
@@ -7301,7 +7711,9 @@
         }
       }
 
-      function openJoggeturLogModal() {
+      var joggeturLogDateISO = null;
+      function openJoggeturLogModal(optionalDateISO) {
+        joggeturLogDateISO = optionalDateISO || null;
         document.getElementById("joggeturDistanse").value = "";
         document.getElementById("joggeturMinutter").value = "";
         document.getElementById("joggeturSekunder").value = "";
@@ -7362,7 +7774,7 @@
             state.joggeturLog = state.joggeturLog || [];
             state.joggeturLog.push({
               id: Date.now() + Math.random(),
-              dateISO: toISODate(new Date()),
+              dateISO: joggeturLogDateISO || toISODate(new Date()),
               distanse: distanse,
               minutter: minutter,
               sekunder: sekunder,
@@ -8059,9 +8471,10 @@
         packageBtns.forEach(btn => {
           btn.addEventListener("click", () => {
             const label = btn.dataset.label || "Express";
-            const pkg = btn.dataset.package || "B";
-            var valgtPakke = (pkg || "B").toString().trim().charAt(0).toUpperCase();
-            var valgtDag = getCurrentDay();
+            const pkg = (btn.dataset.package || "B").toString().trim().charAt(0).toUpperCase();
+            var todayISO = toISODate(new Date());
+            var effectiveType = getEffectiveOktTypeForDate(todayISO);
+            var dayKey = getDayKeyFromOektType(effectiveType);
             var valgtNiva = normalizeLengthLabel(label) || (label || "").toString().toLowerCase();
             if (!valgtNiva && label) {
               var lower = label.toLowerCase();
@@ -8070,7 +8483,11 @@
               else if (lower.indexOf("full") !== -1) valgtNiva = "full";
             }
             if (!valgtNiva) valgtNiva = "express";
-            showWorkoutScreen(label, pkg);
+            if (dayKey === "mandag" || dayKey === "onsdag" || dayKey === "fredag") {
+              applyOektTypeToWorkout("styrke-" + dayKey + "-" + valgtNiva + "-" + pkg, todayISO);
+            } else {
+              showWorkoutScreen(label, pkg);
+            }
           });
         });
 
@@ -8080,9 +8497,16 @@
             let label = "Express";
             if (Number(btn.dataset.lengthMain) <= 20) label = "Kort";
             else if (Number(btn.dataset.lengthMain) >= 60) label = "Full";
+            var todayISO = toISODate(new Date());
+            var effectiveType = getEffectiveOktTypeForDate(todayISO);
+            var dayKey = getDayKeyFromOektType(effectiveType);
             var valgtNiva = normalizeLengthLabel(label) || (label || "").toString().toLowerCase();
             if (!valgtNiva) valgtNiva = "express";
-            showWorkoutScreen(label, "B");
+            if (dayKey === "mandag" || dayKey === "onsdag" || dayKey === "fredag") {
+              applyOektTypeToWorkout("styrke-" + dayKey + "-" + valgtNiva + "-B", todayISO);
+            } else {
+              showWorkoutScreen(label, "B");
+            }
           });
         });
 
@@ -8349,6 +8773,7 @@
         initContinueOrNewWorkoutModal();
         initLogDayDetailModal();
         initJoggeturModal();
+        initMorgenoktModals();
         initTimerInteractions();
         renderHeader();
         renderHome();
