@@ -714,17 +714,6 @@
       border-color: rgba(0,0,0,0.12);
     }
 
-    .btn-manana {
-      width: 100%;
-      padding: 12px 16px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #00B4D8, #9B5DE5);
-      cursor: pointer;
-      margin-bottom: 8px;
-    }
     .move-workout-no-btn {
       width: 100%;
       background: #888;
@@ -2057,16 +2046,6 @@
       <div class="modal-body">
         <div class="skip-reason-btns" id="moveWorkoutDayBtns"></div>
         <button type="button" class="btn btn-outline" id="moveWorkoutJustSkipBtn" style="margin-top:8px; width:100%;">Nei, bare skipp</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="moveWorkoutAfterSkipModal">
-    <div class="modal-dialog">
-      <div class="modal-title">Vil du flytte dagens økt til i morgen?</div>
-      <div class="modal-body">
-        <button type="button" class="btn btn-manana" id="moveWorkoutAfterSkipMananaBtn">Mañana, mañana.....</button>
-        <button type="button" class="btn btn-outline move-workout-no-btn" id="moveWorkoutAfterSkipNoBtn">Nei takk</button>
       </div>
     </div>
   </div>
@@ -4355,8 +4334,6 @@
       let lastResetDayISO = null;
       let noWorkoutContextDateISO = null;
       let setLogState = { exerciseName: "", totalSets: 1, currentSet: 1, loggedSets: [], dateISO: "" };
-      var pendingMoveAfterSkip = null;
-
       function loadState() {
         try {
           const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -4506,22 +4483,10 @@
         6: { dag: "lordag", tittel: "Kondisjon", type: "kondisjon" }
       };
 
-      function getForskyvning() {
-        return parseInt(localStorage.getItem("programForskyvning") || "0", 10);
-      }
-
-      function settForskyvning(tall) {
-        localStorage.setItem("programForskyvning", String(tall));
-        renderHome();
-        renderWeek();
-      }
-
       function getOktForDato(dato) {
         const d = dato instanceof Date ? dato : new Date(String(dato).slice(0, 10) + "T12:00:00");
-        const forskyvning = getForskyvning();
         const ukedag = d.getDay();
-        const forskjøvetUkedag = (ukedag - forskyvning + 7) % 7;
-        return STANDARD_UKEPLAN[forskjøvetUkedag];
+        return STANDARD_UKEPLAN[ukedag];
       }
 
       function getCurrentDay() {
@@ -4824,7 +4789,7 @@
 
         if (headerDayLabel) headerDayLabel.textContent = capitalizeFirst(dayName);
         if (headerDate) headerDate.textContent = capitalizeFirst(dateLabel);
-        if (quoteText) quoteText.textContent = getQuoteForToday();
+        if (quoteText) quoteText.textContent = "\u00AB" + getQuoteForToday() + "\u00BB";
       }
 
       function capitalizeFirst(text) {
@@ -5529,25 +5494,6 @@
         modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
       }
 
-      function openMoveWorkoutAfterSkipModal(payload) {
-        var dateISO = payload && payload.dateISO;
-        const modal = document.getElementById("moveWorkoutAfterSkipModal");
-        const mananaBtn = document.getElementById("moveWorkoutAfterSkipMananaBtn");
-        const noBtn = document.getElementById("moveWorkoutAfterSkipNoBtn");
-        if (!modal) return;
-        if (noBtn) noBtn.onclick = function() { modal.style.display = "none"; };
-        if (mananaBtn) {
-          mananaBtn.onclick = function() {
-            const forskyvning = getForskyvning() + 1;
-            settForskyvning(forskyvning);
-            modal.style.display = "none";
-            window.alert("Mañana it is... 😄");
-          };
-        }
-        modal.style.display = "flex";
-        modal.onclick = function(e) { if (e.target === modal) modal.style.display = "none"; };
-      }
-
       function openCompleteWorkoutModal() {
         completeWorkoutSelectedMood = "💪";
         const modal = document.getElementById("completeWorkoutModal");
@@ -5868,8 +5814,7 @@
           const isToday = iso === todayISO;
           const isFuture = iso > todayISO;
           const programDay = getProgramDayForDate(d);
-          const isTomDag = info && info.status === "skippet" && getForskyvning() > 0;
-          const dayTitle = isTomDag ? "Ingen økt i dag" : (programDay && programDay.config ? programDay.config.tittel : "Økt");
+          const dayTitle = programDay && programDay.config ? programDay.config.tittel : "Økt";
 
           const card = document.createElement("div");
           card.className = "week-card";
@@ -5900,7 +5845,7 @@
           const typeSpan = document.createElement("span");
           typeSpan.className = "week-type";
           typeSpan.textContent = dayTitle;
-          if (!isTomDag && info && (info.label || info.length)) {
+          if (info && (info.label || info.length)) {
             typeSpan.textContent = `${dayTitle} • ${info.label || ""} ${info.length ? info.length + " min" : ""}`.trim();
           }
 
@@ -6022,9 +5967,6 @@
           resetBtn.className = "btn btn-day-reset";
           resetBtn.textContent = "🔄 Nullstill dag";
           resetBtn.addEventListener("click", () => {
-            let forskyvning = getForskyvning() - 1;
-            if (forskyvning < 0) forskyvning = 0;
-            settForskyvning(forskyvning);
             delete state.dayStatus[iso];
             state.logs = (state.logs || []).filter(l => l.dateISO !== iso);
             clearFremgangForDate(iso);
@@ -6603,6 +6545,7 @@
         });
 
         setSwipeTransform(-idx * 25, true);
+        if (target === "week") renderWeek();
       }
 
       function getCurrentTab() {
@@ -6765,7 +6708,6 @@
         if (nullstillTreningsplanBtn) {
           nullstillTreningsplanBtn.addEventListener("click", () => {
             if (!window.confirm("Er du sikker på at du vil nullstille treningsplanen? Alle flyttede økter fjernes.")) return;
-            settForskyvning(0);
             Object.keys(state.dayStatus || {}).forEach(function(dateKey) {
               if (state.dayStatus[dateKey] && state.dayStatus[dateKey].status === "skippet") {
                 delete state.dayStatus[dateKey];
@@ -6918,10 +6860,6 @@
 
         function closeConfirmAndMaybeOpenMove() {
           closeNoWorkoutModal();
-          if (pendingMoveAfterSkip) {
-            openMoveWorkoutAfterSkipModal(pendingMoveAfterSkip);
-            pendingMoveAfterSkip = null;
-          }
         }
 
         if (closeConfirmBtn) {
@@ -6936,8 +6874,6 @@
                 var t = new Date();
                 return t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
               })();
-              var info = state.dayStatus[dateISO] || { label: "Express", length: 35, pkg: "B" };
-              pendingMoveAfterSkip = { dateISO: dateISO, label: info.label, length: info.length, pkg: info.pkg };
               addSkippedDayLog(dateISO, reason);
               var arr = NO_WORKOUT_RESPONSES[reason];
               var quote = (arr && arr.length) ? arr[Math.floor(Math.random() * arr.length)] : "This is an ex-excuse. It has ceased to be valid.";
